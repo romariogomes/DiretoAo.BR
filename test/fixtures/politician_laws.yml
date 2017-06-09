@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  politician: one
+  law_project: one
+
+two:
+  politician: two
+  law_project: two

@@ -1,0 +1,22 @@
+<%= form_with(model: acceptance, local: true) do |form| %>
+  <% if acceptance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(acceptance.errors.count, "error") %> prohibited this acceptance from being saved:</h2>
+
+      <ul>
+      <% acceptance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :like %>
+    <%= form.check_box :like, id: :acceptance_like %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

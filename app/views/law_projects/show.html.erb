@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Law number:</strong>
+  <%= @law_project.law_number %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @law_project.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @law_project.date %>
+</p>
+
+<%= link_to 'Edit', edit_law_project_path(@law_project) %> |
+<%= link_to 'Back', law_projects_path %>

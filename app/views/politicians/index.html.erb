@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Politicians</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Birthdate</th>
+      <th>Party</th>
+      <th>Photo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @politicians.each do |politician| %>
+      <tr>
+        <td><%= politician.name %></td>
+        <td><%= politician.birthdate %></td>
+        <td><%= politician.party %></td>
+        <td><%= politician.photo %></td>
+        <td><%= link_to 'Show', politician %></td>
+        <td><%= link_to 'Edit', edit_politician_path(politician) %></td>
+        <td><%= link_to 'Destroy', politician, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Politician', new_politician_path %>

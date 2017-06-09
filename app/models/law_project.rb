@@ -1,0 +1,2 @@
+class LawProject < ApplicationRecord
+end
