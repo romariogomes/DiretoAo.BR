@@ -11,27 +11,48 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :politician_name %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= form.label :name, 'Nome' %>
+        <%= form.text_field :name, id: :politician_name, class: 'form-control' %>
+      </div>
+    </div> 
   </div>
 
-  <div class="field">
-    <%= form.label :birthdate %>
-    <%= form.date_select :birthdate, id: :politician_birthdate %>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= form.label :birthdate, 'Nascimento' %>
+        <%= form.text_field :birthdate, id: :politician_birthdate, type: 'date', class: 'form-control' %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :party %>
-    <%= form.text_field :party, id: :politician_party %>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= form.label :party, 'Partido' %>
+        <%= form.text_field :party, id: :politician_party, class: 'form-control' %>
+      </div>
+    </div>
   </div>
+
+  <!-- <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        
+      </div>
+    </div>
+  </div> -->
 
   <div class="field">
     <%= form.label :photo %>
     <%= form.text_field :photo, id: :politician_photo %>
-  </div>
+  </div> <br/>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar", class: 'btn btn-primary'%>
+    <%= button_to 'Voltar', politicians_path, class: 'btn btn-default btn-sm', method: :get%>
   </div>
 <% end %>

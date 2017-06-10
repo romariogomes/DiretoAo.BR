@@ -1,5 +1,11 @@
-<h1>New Politician</h1>
+<div class="container">
 
-<%= render 'form', politician: @politician %>
+	<h2>Cadastro de políticos</h2><br>
+	
+	<div class="container">
+		<%= render 'form', politician: @politician %>
+	</div>
+	<%= link_to 'Back', politicians_path %>	
 
-<%= link_to 'Back', politicians_path %>
+</div>
+
