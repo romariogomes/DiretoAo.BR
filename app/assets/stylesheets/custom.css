@@ -20,3 +20,7 @@
 	margin-right: 10px;
     margin-left: 10px;
 }
+
+textarea.form-control {
+	height: 250px !important;
+}

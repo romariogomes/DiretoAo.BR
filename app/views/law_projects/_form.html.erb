@@ -11,22 +11,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :law_number %>
-    <%= form.number_field :law_number, id: :law_project_law_number %>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= form.label :law_number, 'Projeto de lei número' %>
+        <%= form.number_field :law_number, id: :law_project_law_number, class: 'form-control'  %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :law_project_description %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :description, 'Descrição do projeto' %>
+        <%= form.text_area :description, id: :law_project_description, class: 'form-control' %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.date_select :date, id: :law_project_date %>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= form.label :date, 'Data' %>
+        <%= form.text_field :date, id: :law_project_date, type: 'date', class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= form.label 'Autor' %>
+        <%= form.text_field :date, id: :law_project_date, class: 'form-control' %>
+      </div>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar", class: 'btn btn-primary'%>
+    <%= button_to 'Voltar', law_projects_path, class: 'btn btn-default btn-sm', method: :get%>
   </div>
 <% end %>
