@@ -1,7 +1,6 @@
 namespace :project do
-  
+
   desc "Populate State table"
-  
   task seed_state: :environment do
 
 	  ESTADOS_BRASILEIROS = {
@@ -41,10 +40,22 @@ namespace :project do
 	  value = ESTADOS_BRASILEIROS.values_at(key)
 	  
 	  state.state_name = sigle
-	  state.save
-	  
+	  state.save	  
 	end
+  end
 
+  desc "Populate Charge table"
+
+  task seed_charge: :environment do
+  	
+  	chargeArray = ["DEPUTADO ESTADUAL", "DEPUTADO FEDERAL", "GOVERNADOR", "PREFEITO", "PRESIDENTE", "SENADOR", "VEREADOR"]
+  	
+  	chargeArray.each do |c|
+
+  		charge = Charge.new
+  		charge.charge_name = c
+  		charge.save
+  	end
   end
 
 end
