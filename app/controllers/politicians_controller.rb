@@ -15,17 +15,22 @@ class PoliticiansController < ApplicationController
   # GET /politicians/new
   def new
     @politician = Politician.new
+    load_charges
+    load_states
   end
 
   # GET /politicians/1/edit
   def edit
+    load_charges
+    load_states
   end
 
   # POST /politicians
   # POST /politicians.json
   def create
     @politician = Politician.new(politician_params)
-
+    require 'pry'
+    binding.pry
     respond_to do |format|
       if @politician.save
         format.html { redirect_to @politician, notice: 'Politician was successfully created.' }
@@ -61,6 +66,14 @@ class PoliticiansController < ApplicationController
     end
   end
 
+  def load_states
+    @states = State.all
+  end
+
+  def load_charges
+    @charges = Charge.first(2)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_politician
@@ -69,6 +82,6 @@ class PoliticiansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def politician_params
-      params.require(:politician).permit(:name, :birthdate, :party, :photo)
+      params.require(:politician).permit(:name, :birthdate, :party, :photo, :charge_id, :state_id)
     end
 end
