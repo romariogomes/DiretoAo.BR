@@ -38,13 +38,23 @@
     </div>
   </div>
 
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-2">
       <div class="form-group">
-        
+        <%= form.label :charge_id, 'Cargo' %>
+        <%= collection_select(:politician, :charge_id, @charges, :id, :charge_name, {prompt: "Selecione o cargo"}, {class: 'form-control'} ) %>
       </div>
     </div>
-  </div> -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= form.label :state_id, 'Estado' %>
+        <%= collection_select(:politician, :state_id, @states, :id, :state_name, {prompt: "Selecione o Estado"}, {class: 'form-control'} ) %>
+      </div>
+    </div>
+  </div>
 
   <div class="field">
     <%= form.label :photo %>
