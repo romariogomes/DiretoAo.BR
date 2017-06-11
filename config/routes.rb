@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   
+  get 'sessions/new'
+
   get '/home' => 'home#index'
 
   root 'home#index'
+
+  get    'sign_in'   => 'sessions#new'
+  post   'sign_in'   => 'sessions#create'
+  delete 'sign_out'  => 'sessions#destroy'
 
   resources :comments
   resources :acceptances
