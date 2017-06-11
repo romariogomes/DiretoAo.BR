@@ -29,8 +29,6 @@ class PoliticiansController < ApplicationController
   # POST /politicians.json
   def create
     @politician = Politician.new(politician_params)
-    require 'pry'
-    binding.pry
     respond_to do |format|
       if @politician.save
         format.html { redirect_to @politician, notice: 'Politician was successfully created.' }
