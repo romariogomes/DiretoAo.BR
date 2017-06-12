@@ -28,7 +28,7 @@ class LawProjectsController < ApplicationController
 
     respond_to do |format|
       if @law_project.save
-        format.html { redirect_to @law_project, notice: 'Law project was successfully created.' }
+        format.html { redirect_to law_projects_path, notice: 'Law project was successfully created.' }
         format.json { render :show, status: :created, location: @law_project }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class LawProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def law_project_params
-      params.require(:law_project).permit(:law_number, :description, :date)
+      params.require(:law_project).permit(:law_number, :description, :date, :politician_ids)
     end
 end
