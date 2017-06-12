@@ -42,7 +42,7 @@
     <div class="col-md-2">
       <div class="form-group">
         <%= form.label 'Autor' %>
-        <%= form.text_field :date, id: :law_project_date, class: 'form-control' %>
+        <%= collection_select(:law_project, :politician_ids, load_politicians, :id, :name, {prompt: "Autor do projeto"}, {class: 'form-control'} ) %>
       </div>
     </div>
   </div>
