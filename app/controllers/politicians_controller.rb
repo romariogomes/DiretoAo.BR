@@ -31,7 +31,7 @@ class PoliticiansController < ApplicationController
     @politician = Politician.new(politician_params)
     respond_to do |format|
       if @politician.save
-        format.html { redirect_to @politician, notice: 'Politician was successfully created.' }
+        format.html { redirect_to politicians_path, notice: 'Politician was successfully created.' }
         format.json { render :show, status: :created, location: @politician }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class PoliticiansController < ApplicationController
   def update
     respond_to do |format|
       if @politician.update(politician_params)
-        format.html { redirect_to @politician, notice: 'Politician was successfully updated.' }
+        format.html { redirect_to politicians_path, notice: 'Politician was successfully updated.' }
         format.json { render :show, status: :ok, location: @politician }
       else
         format.html { render :edit }
