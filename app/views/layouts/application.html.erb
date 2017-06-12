@@ -19,8 +19,16 @@
     <%= render 'layouts/header' %>
 
   <% else %>
-  
-    <%= render 'layouts/header_user' %>
+
+    <% if current_user.id == 5 %>
+
+      <%= render 'layouts/header_admin' %>
+
+    <% else %>
+
+      <%= render 'layouts/header_user' %>
+
+    <% end %>
 
   <% end %>
 
