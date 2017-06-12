@@ -5,6 +5,19 @@ class LawProjectsController < ApplicationController
   # GET /law_projects.json
   def index
     @law_projects = LawProject.all
+
+    render 'users_index' if ((logged_in? && !isAdmin?) || (!logged_in?))
+    # if logged_in?
+
+    #   if !isAdmin?
+    #     render 'users_index'
+    #   end
+
+    # else
+
+    #   render 'users_index'
+    # end
+
   end
 
   # GET /law_projects/1
