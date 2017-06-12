@@ -18,9 +18,9 @@
     <% @law_projects.each do |law_project| %>
       <tr>
         <td><%= law_project.law_number %></td>
-        <td><%= law_project.description %></td>
+        <td><%= law_project.politicians.first.name %></td>
         <td><%= law_project.date %></td>
-        <td><%= link_to 'Visualizar', law_project %></td>
+        <td><%= link_to 'Visualizar projeto', law_project %></td>
         <td><%= link_to 'Editar', edit_law_project_path(law_project) %></td>
         <td>
             <%= button_to law_project, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }  do %>
