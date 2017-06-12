@@ -20,7 +20,7 @@
 
   <% else %>
 
-    <% if current_user.id == 5 %>
+    <% if isAdmin? %>
 
       <%= render 'layouts/header_admin' %>
 

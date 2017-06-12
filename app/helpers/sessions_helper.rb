@@ -22,4 +22,12 @@ module SessionsHelper
     	session.delete(:user_id)
     	@current_user = nil
     end
+
+    def isAdmin?
+        if current_user.id == 5
+          return true
+        else
+          return false
+        end
+    end
 end
