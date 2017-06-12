@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+
+<h2>Projetos de lei</h2><br />
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th>Autor</th>
+      <th>Data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @law_projects.each do |law_project| %>
+      <tr>
+        <td><%= law_project.law_number %></td>
+        <td><%= law_project.politicians.first.name %></td>
+        <td><%= law_project.date %></td>
+        <td><%= link_to 'Visualizar projeto', law_project %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
