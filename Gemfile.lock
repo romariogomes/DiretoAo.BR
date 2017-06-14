@@ -43,6 +43,8 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (7.1.1)
       execjs
+    autosize (1.1.18.4)
+      jquery-rails
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
@@ -188,6 +190,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autosize
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.6)
   byebug
