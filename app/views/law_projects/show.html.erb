@@ -1,19 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Law number:</strong>
-  <%= @law_project.law_number %>
-</p>
+<div class="container">
 
-<p>
-  <strong>Description:</strong>
-  <%= @law_project.description %>
-</p>
+	<%= form_with(model: @law_project, local: true) do |form| %>
+		
+		<% @law_project.politician_ids[0] = @law_project.politicians.first.name %>
+	  <div class="row">
+	    
+	    <div class="col-md-3">
+	      <div class="form-group">
+	        <%= form.label :law_number, 'Projeto de lei número' %>
+	        <%= form.number_field :law_number, id: :law_project_law_number, class: 'form-control', disabled: :true  %>
+	      </div>
+	    </div>
 
-<p>
-  <strong>Date:</strong>
-  <%= @law_project.date %>
-</p>
+	    <div class="col-md-4">
+	      <div class="form-group">
+	        <%= form.label 'Autor' %>
+	        <%= form.text_field :politician_ids, id: :law_project_politician_ids, class: 'form-control', readonly: :true %>
+	      </div>
+	    </div>
 
-<%= link_to 'Edit', edit_law_project_path(@law_project) %> |
-<%= link_to 'Back', law_projects_path %>
+	    <div class="col-md-2">
+	      <div class="form-group">
+	        <%= form.label :date, 'Data' %>
+	        <%= form.text_field :date, id: :law_project_date, type: 'date', class: 'form-control', readonly: :true %>
+	      </div>
+	    </div>
+
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-12">
+	      <div class="form-group">
+	        <%= form.label :description, 'Descrição do projeto' %>
+	        <%= form.text_area :description, id: :law_project_description, class: 'form-control', readonly: :true %>
+	      </div>
+	    </div>
+	  </div>
+	<% end %>
+
+	<%= link_to 'Back', law_projects_path %>
+</div>
