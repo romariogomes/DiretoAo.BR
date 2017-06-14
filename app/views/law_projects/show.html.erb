@@ -40,5 +40,6 @@
 	  </div>
 	<% end %>
 
+	<%= link_to 'Editar', edit_law_project_path(@law_project) if (logged_in? && isAdmin?) %>
 	<%= link_to 'Back', law_projects_path %>
 </div>
