@@ -1,0 +1,14 @@
+<%= form_with(model: @law_project, local: true) do |form| %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form.label :description, 'O que você acha deste projeto?' %>
+        <%= form.text_area :description, id: 'comment-box', class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  
+<% end %>
+
+
