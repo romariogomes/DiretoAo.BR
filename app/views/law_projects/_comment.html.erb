@@ -1,14 +1,15 @@
-<%= form_with(model: @law_project, local: true) do |form| %>
-
+<%= form_for @comment_form, :url => { :controller => "comments", :action => "create" }, :html => {:method => :post}, local: true do |form|  %>
+	
+  <%= form.hidden_field :law_project_id, :value => params['id'] %>
+  
   <div class="row">
     <div class="col-md-8">
       <div class="form-group">
         <%= form.label :description, 'O que você acha deste projeto?' %>
-        <%= form.text_area :description, id: 'comment-box', class: 'form-control' %>
+        <%= form.text_area :description, id: 'comment-box', class: 'form-control' %>  
+        <br /><%= form.submit "Enviar", class: 'btn btn-primary'%>    	
       </div>
-    </div>
+    </div>    
   </div>
   
 <% end %>
-
-
