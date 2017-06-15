@@ -24,11 +24,16 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    
+    create_interaction
+
     @comment = Comment.new(comment_params)
+    @comment.interaction = @interaction
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        # format.html { redirect_to law_projects_path, notice: 'Comment was successfully created.' }
+        format.html { redirect_to '/law_projects/'+@interaction.law_project_id.to_s, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -69,6 +74,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:description, :comment_father)
+      params.require(:comment).permit(:description, :comment_father, :comment_url, :interaction_id)
     end
 end
