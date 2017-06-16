@@ -5,9 +5,16 @@
   <div class="row">
     <div class="col-md-8">
       <div class="form-group">
-        <%= form.label :description, 'O que você acha deste projeto?' %>
-        <%= form.text_area :description, id: 'comment-box', class: 'form-control' %>  
-        <br /><%= form.submit "Enviar", class: 'btn btn-primary'%>    	
+        <h3>O que você acha deste projeto?</h3>
+        <% if current_user.nil?%>
+          <%= form.text_area :description, id: 'comment-box', class: 'form-control', disabled: :true %>  
+          <br />        
+          <%= form.submit "Enviar", class: 'btn btn-primary', disabled: :true %> &nbsp Faça login para comentar
+        <% else %>
+          <%= form.text_area :description, id: 'comment-box', class: 'form-control' %>  
+          <br />        
+          <%= form.submit "Enviar", class: 'btn btn-primary'%>
+        <% end %>    	
       </div>
     </div>    
   </div>
