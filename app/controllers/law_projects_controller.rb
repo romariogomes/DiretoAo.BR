@@ -13,6 +13,7 @@ class LawProjectsController < ApplicationController
   # GET /law_projects/1
   # GET /law_projects/1.json
   def show
+    @acceptance_project = Acceptance.new
     @comment_form = Comment.new
     load_all_comments(params['id'])
   end
