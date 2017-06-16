@@ -1,0 +1,24 @@
+<h2>Comentários:</h2> (<%= @all_comments.size %>)<hr /> <br />
+<div class="container">
+  <% @all_comments.each do |law_project| %>
+    
+    <%if !law_project.comment.nil? %>
+
+      <%= form_for law_project.comment, :url => { :controller => "comments", :action => "create" }, :html => {:method => :post}, local: true do |form|  %>
+      
+        <%= form.hidden_field :law_project_id, :value => params['id'] %>
+        
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <%= form.label :description, law_project.comment.interaction.user.name + ' disse:'%>
+              <%= form.text_area :description, id: 'all-comment-box', class: 'form-control', disabled: :true %>  
+            </div>
+          </div>    
+        </div><br />    
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+

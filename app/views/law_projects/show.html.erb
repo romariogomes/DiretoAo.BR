@@ -47,6 +47,10 @@
 	<div class="container">
 		<%= render 'comment' if (!logged_in? || (logged_in? && !isAdmin?)) %>
 	</div>
+
+	<div class="container">
+		<%= render 'all_comments' %>
+	</div>
 	
 
 </div>
