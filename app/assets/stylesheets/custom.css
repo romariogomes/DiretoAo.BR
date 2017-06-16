@@ -33,6 +33,30 @@
 #all-comment-box {
     height: 100px !important;
 }
+
+.like-icon {
+    background: url('like_black.png') no-repeat;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.liked {
+    background: url('like_green.png') no-repeat;
+}
+
+.dislike-icon {
+    background: url('dislike_black.png') no-repeat;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: 4px;
+    margin-top: 5px;
+}
+
+.disliked {
+    background: url('dislike_red.png') no-repeat;
+}
 /*textarea.form-control {
     height: 250px;
 }*/

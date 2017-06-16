@@ -41,9 +41,13 @@
 	<% end %>
 
 	<%= link_to 'Editar', edit_law_project_path(@law_project) if (logged_in? && isAdmin?) %>
-	<%= link_to 'Voltar', law_projects_path %>
+	<%= link_to 'Voltar', law_projects_path %> <br /> <br />
 
-	<hr />
+	<div class="container">
+		<h4>Gostei <span class="like-icon" aria-hidden="true"></span> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+		Não gostei <span class="dislike-icon"></span></h4>
+	</div><hr />
+
 	<div class="container">
 		<%= render 'comment' if (!logged_in? || (logged_in? && !isAdmin?)) %>
 	</div>
