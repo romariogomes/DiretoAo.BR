@@ -14,7 +14,7 @@ class LawProjectsController < ApplicationController
   # GET /law_projects/1.json
   def show
     @comment_form = Comment.new
-    
+    load_all_comments(params['id'])
   end
 
   # GET /law_projects/new

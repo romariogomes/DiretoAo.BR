@@ -12,4 +12,8 @@ module LawProjectsHelper
 		
 		@interaction.save
 	end
+
+	def load_all_comments(law_project_id)
+		@all_comments = Interaction.where(law_project_id: law_project_id)
+	end
 end
