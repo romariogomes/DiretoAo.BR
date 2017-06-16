@@ -30,6 +30,9 @@
     margin: 0 -2px 0 -258px;
 }
 
+#all-comment-box {
+    height: 100px !important;
+}
 /*textarea.form-control {
     height: 250px;
 }*/
