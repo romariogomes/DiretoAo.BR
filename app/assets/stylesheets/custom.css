@@ -39,6 +39,7 @@
     width: 20px;
     height: 20px;
     position: absolute;
+    margin-left: 3px;
 }
 
 .liked {
@@ -56,6 +57,10 @@
 
 .disliked {
     background: url('dislike_red.png') no-repeat;
+}
+
+h4 > a:hover{
+    background-color: transparent;
 }
 /*textarea.form-control {
     height: 250px;
