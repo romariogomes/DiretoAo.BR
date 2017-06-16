@@ -1,0 +1,23 @@
+<%= form_for @acceptance_project, :url => { :controller => "acceptances", :action => "create" }, :html => {:method => :post}, local: true do |form|  %>
+  		
+
+  	<!-- NOT WORKING   -->
+	<%= form.hidden_field :law_project_id, :value => params['id'] %>
+	<%= form.check_box :like, id: :acceptance_like, hidden: :true %>
+
+  	<div class="actions">
+
+    	<%= button_tag 'submit', :name => 'teste', value: '1' do %>
+			<h4>Aprovo <span class="like-icon btn-primay" aria-hidden="true"></span> 
+		<% end %> &nbsp &nbsp &nbsp &nbsp &nbsp <br />
+	
+		<%= button_tag 'submit', :name => 'teste', value: '0' do %>
+			Não aprovo <span class="dislike-icon" aria-hidden="true"></span></h4>
+		<% end %>
+	</div>
+<% end %>
+		
+		
+
+
+	
