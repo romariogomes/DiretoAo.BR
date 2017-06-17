@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to '/law_projects/'+@comment.interaction.law_project_id.to_s, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to '/law_projects/'+@comment.interaction.law_project_id.to_s, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,7 +69,9 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
+      
       @comment = Comment.find(params[:id])
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
