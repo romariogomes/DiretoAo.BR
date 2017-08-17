@@ -1,3 +1,17 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a:hover, a:visited {
+    background-color: transparent !important;
+    color: #333333 !important;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
 .logo-home{
     height: 100px;
     margin-top: -45px;
@@ -39,7 +53,6 @@
     width: 20px;
     height: 20px;
     position: absolute;
-    margin-left: 3px;
 }
 
 .liked {
@@ -65,6 +78,16 @@ h4 > a:hover{
 
 .col-md-8 > a:hover {
     background-color: transparent;
+}
+
+.like-strong, .like-strong:hover {
+    font-weight: 700;
+    color: #099e3b !important;
+}
+
+.dislike-strong, .dislike-strong:hover {
+    font-weight: 700;
+    color: red !important;
 }
 /*textarea.form-control {
     height: 250px;

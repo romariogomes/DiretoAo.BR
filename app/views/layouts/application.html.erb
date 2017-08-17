@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700'%>
     
   </head>
 
@@ -35,15 +36,5 @@
   <br>
   <%= yield %> 
     
-  </body>
-
-  <script>
-
-    $(document).ready(function(){
-      $('#comment-box').autosize();
-      $('#law_project_description').autosize();
-    }); 
-
-  </script>
-  
+  </body>  
 </html>

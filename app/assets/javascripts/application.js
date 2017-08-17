@@ -15,3 +15,4 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery.autosize
+//= require custom.js

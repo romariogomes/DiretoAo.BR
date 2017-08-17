@@ -7,13 +7,13 @@
 
   	<div class="actions">
 
-    	<%= button_tag 'submit', :name => 'teste', value: '1' do %>
-			<h4>Aprovo <span class="like-icon btn-primay" aria-hidden="true"></span> 
-		<% end %> &nbsp &nbsp &nbsp &nbsp &nbsp <br />
-	
-		<%= button_tag 'submit', :name => 'teste', value: '0' do %>
-			Não aprovo <span class="dislike-icon" aria-hidden="true"></span></h4>
-		<% end %>
+  		<%= link_to 'javascript:;', id: "btn-like" do %>
+            aprovo <span class="like-icon" aria-hidden="true"></span>
+        <% end %>
+  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  		<%= link_to 'javascript:;', id: "btn-dislike" do %>
+            não aprovo <span class="dislike-icon" aria-hidden="true"></span>
+        <% end %>    	
 	</div>
 <% end %>
 		
