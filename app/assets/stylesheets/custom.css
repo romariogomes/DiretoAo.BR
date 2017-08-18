@@ -41,7 +41,7 @@ a {
 }
 
 #popin-login {
-    margin: 0 -2px 0 -258px;
+    margin: 0 -2px 0 0;
 }
 
 #all-comment-box {
@@ -100,3 +100,18 @@ h4 > a:hover{
 /*#comment-box {
     height: 50px !important;
 }*/
+
+@media screen and (min-width: 765px) {
+    #popin-login {
+        width: 345px;
+    }
+    .navbar-default .navbar-nav > li > a {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .navbar-default .navbar-nav > li > a {
+        font-size: 12px;
+    }
+}
