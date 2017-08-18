@@ -1,4 +1,5 @@
 class AcceptancesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_acceptance, only: [:show, :edit, :update, :destroy]
 
   # GET /acceptances
@@ -21,6 +22,20 @@ class AcceptancesController < ApplicationController
   def edit
   end
 
+  def acceptancesInterceptor
+    
+    acceptance = Acceptance.new
+    interaction = Interaction.new
+    
+    interaction.user = current_user
+    interaction.law_project = LawProject.find(params[:law_project])
+
+    interaction.save
+    
+    acceptance.like = params[:like]
+    acceptance.interaction = interaction
+    acceptance.save    
+  end
   # POST /acceptances
   # POST /acceptances.json
   def create
