@@ -59,6 +59,10 @@ a {
     background: url('like_green.png') no-repeat;
 }
 
+.like-disabled {
+    background: url('like_grey.png') no-repeat;
+}
+
 .dislike-icon {
     background: url('dislike_black.png') no-repeat;
     width: 20px;
@@ -70,6 +74,10 @@ a {
 
 .disliked {
     background: url('dislike_red.png') no-repeat;
+}
+
+.dislike-disabled {
+    background: url('dislike_grey.png') no-repeat;
 }
 
 h4 > a:hover{
@@ -88,6 +96,11 @@ h4 > a:hover{
 .dislike-strong, .dislike-strong:hover {
     font-weight: 700;
     color: red !important;
+}
+
+#btn-like-disabled, #btn-dislike-disabled {
+    font-weight: 700;
+    color: #D6D6D6 !important;   
 }
 /*textarea.form-control {
     height: 250px;

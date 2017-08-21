@@ -24,17 +24,19 @@ class AcceptancesController < ApplicationController
 
   def acceptancesInterceptor
     
-    acceptance = Acceptance.new
-    interaction = Interaction.new
-    
-    interaction.user = current_user
-    interaction.law_project = LawProject.find(params[:law_project])
+    if current_user
+      acceptance = Acceptance.new
+      interaction = Interaction.new
+      
+      interaction.user = current_user
+      interaction.law_project = LawProject.find(params[:law_project])
 
-    interaction.save
-    
-    acceptance.like = params[:like]
-    acceptance.interaction = interaction
-    acceptance.save    
+      interaction.save
+      
+      acceptance.like = params[:like]
+      acceptance.interaction = interaction
+      acceptance.save   
+    end
   end
   # POST /acceptances
   # POST /acceptances.json
