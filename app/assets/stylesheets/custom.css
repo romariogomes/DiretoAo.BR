@@ -100,7 +100,8 @@ h4 > a:hover{
 
 #btn-like-disabled, #btn-dislike-disabled {
     font-weight: 700;
-    color: #D6D6D6 !important;   
+    color: #D6D6D6 !important;
+    cursor: default;
 }
 /*textarea.form-control {
     height: 250px;

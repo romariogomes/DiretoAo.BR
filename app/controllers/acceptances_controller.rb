@@ -23,20 +23,37 @@ class AcceptancesController < ApplicationController
   end
 
   def acceptancesInterceptor
-    
-    if current_user
-      acceptance = Acceptance.new
-      interaction = Interaction.new
-      
-      interaction.user = current_user
-      interaction.law_project = LawProject.find(params[:law_project])
 
-      interaction.save
-      
-      acceptance.like = params[:like]
-      acceptance.interaction = interaction
-      acceptance.save   
+    if current_user
+
+      if (!check_acceptance_existent)
+
+        acceptance = Acceptance.new
+        interaction = Interaction.new
+        
+        interaction.user = current_user
+        interaction.law_project = LawProject.find(params[:law_project])
+
+        interaction.save
+        
+        acceptance.like = params[:like]
+        acceptance.interaction = interaction
+
+        
+        acceptance.save
+        
+      else
+
+        if @loadedAcceptance.first.like
+          Acceptance.update(@loadedAcceptance.ids.first, like: false)
+        else
+          Acceptance.update(@loadedAcceptance.ids.first, like: true)  
+        end
+
+      end
+
     end
+
   end
   # POST /acceptances
   # POST /acceptances.json
@@ -76,6 +93,25 @@ class AcceptancesController < ApplicationController
       format.html { redirect_to acceptances_url, notice: 'Acceptance was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def check_acceptance_existent
+  
+    interaction = Interaction.where(user_id: current_user.id)
+
+    if interaction.blank?
+      
+      return false
+    else
+      @loadedAcceptance = Acceptance.where(interaction_id: interaction.ids.first)
+    end
+    
+    if @loadedAcceptance.blank?
+      return false
+    else
+      return true
+    end
+
   end
 
   private
