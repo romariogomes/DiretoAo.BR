@@ -12,6 +12,19 @@ a {
     text-decoration: none !important;
 }
 
+.nav.navbar-nav li a:hover {
+    background: #DDD !important;
+    border-radius: 5px;
+}
+
+nav {
+    border-radius: 5px;
+}
+
+.nav.navbar-nav li a.msg-cadastrar:hover{
+    background: transparent !important; 
+}
+
 .logo-home{
     height: 100px;
     margin-top: -45px;
@@ -103,6 +116,7 @@ h4 > a:hover{
     color: #D6D6D6 !important;
     cursor: default;
 }
+
 /*textarea.form-control {
     height: 250px;
 }*/
@@ -121,6 +135,12 @@ h4 > a:hover{
     }
     .navbar-default .navbar-nav > li > a {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    a.first-item-menu {
+        margin-top: 15px;
     }
 }
 

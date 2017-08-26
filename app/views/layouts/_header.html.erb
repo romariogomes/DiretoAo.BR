@@ -22,7 +22,7 @@
             
             <ul class="nav navbar-nav">
 
-              <li><a href="#">Sobre o projeto</a></li>
+              <li><a class="first-item-menu" href="#">Sobre o projeto</a></li>
               
               <li><%=link_to 'Projetos de lei', law_projects_path %></li>
 
@@ -74,7 +74,8 @@
 
                     <div class="form-group">
                       <div class="col-md-12 control">
-                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Não possui conta? <%= link_to "Cadastre-se aqui!", new_user_path %>
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Não possui conta? 
+                          <b><%= link_to "Cadastre-se aqui!", new_user_path, class: 'msg-cadastrar' %></b>
                         </div>
                       </div>
                     </div> 
