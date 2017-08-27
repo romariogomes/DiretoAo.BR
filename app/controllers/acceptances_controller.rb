@@ -35,20 +35,27 @@ class AcceptancesController < ApplicationController
         interaction.law_project = LawProject.find(params[:law_project])
 
         interaction.save
-        
+
         acceptance.like = params[:like]
         acceptance.interaction = interaction
 
-        
         acceptance.save
         
       else
 
-        if @loadedAcceptance.first.like
-          Acceptance.update(@loadedAcceptance.ids.first, like: false)
+        if params[:to_delete].nil?
+          
+          if @loadedAcceptance.first.like
+            Acceptance.update(@loadedAcceptance.first.id, like: false)
+          else
+            Acceptance.update(@loadedAcceptance.first.id, like: true)  
+          end
+
         else
-          Acceptance.update(@loadedAcceptance.ids.first, like: true)  
+          Acceptance.delete(@loadedAcceptance.first.id)
+          Interaction.delete(@loadedAcceptance.first.interaction_id)
         end
+        
 
       end
 
@@ -97,13 +104,22 @@ class AcceptancesController < ApplicationController
 
   def check_acceptance_existent
   
-    interaction = Interaction.where(user_id: current_user.id)
+    interactions = Interaction.where(user_id: current_user.id)
 
-    if interaction.blank?
+    if interactions.blank?
       
       return false
+
     else
-      @loadedAcceptance = Acceptance.where(interaction_id: interaction.ids.first)
+
+      interactions.each do |i|
+        if (!i.acceptance.nil?)
+          @acceptanceInteraction = i
+        end
+      end
+    
+      @loadedAcceptance = Acceptance.where(interaction_id: @acceptanceInteraction)
+      
     end
     
     if @loadedAcceptance.blank?
