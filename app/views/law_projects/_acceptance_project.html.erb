@@ -5,16 +5,63 @@
 	<%= form.hidden_field :law_project_id, :value => params['id'] %>
 	<%= form.check_box :like, id: :acceptance_like, hidden: :true %>
 
-  	<div class="actions">
+    <% if logged_in? %>
+    	
+      <div class="actions">
 
-    	<%= button_tag 'submit', :name => 'teste', value: '1' do %>
-			<h4>Aprovo <span class="like-icon btn-primay" aria-hidden="true"></span> 
-		<% end %> &nbsp &nbsp &nbsp &nbsp &nbsp <br />
-	
-		<%= button_tag 'submit', :name => 'teste', value: '0' do %>
-			Não aprovo <span class="dislike-icon" aria-hidden="true"></span></h4>
-		<% end %>
-	</div>
+        <%if (!@acceptanceUser.nil?)%>
+          
+          <%if (@acceptanceUser.acceptance.like)%>
+
+            <%= link_to 'javascript:;', id: "btn-like", class: "like-strong" do %>
+            aprovo <span class="like-icon liked" aria-hidden="true"></span>
+            <% end %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= link_to 'javascript:;', id: "btn-dislike" do %>
+              não aprovo <span class="dislike-icon" aria-hidden="true"></span>
+            <% end %>
+
+          <%else%>
+
+            <%= link_to 'javascript:;', id: "btn-like" do %>
+            aprovo <span class="like-icon" aria-hidden="true"></span>
+            <% end %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= link_to 'javascript:;', id: "btn-dislike", class: "dislike-strong" do %>
+              não aprovo <span class="dislike-icon disliked" aria-hidden="true"></span>
+            <% end %>
+
+          <%end%>
+
+        <%else%>
+
+          <%= link_to 'javascript:;', id: "btn-like" do %>
+          aprovo <span class="like-icon" aria-hidden="true"></span>
+          <% end %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to 'javascript:;', id: "btn-dislike" do %>
+            não aprovo <span class="dislike-icon" aria-hidden="true"></span>
+          <% end %>  
+
+        <%end%>
+    		
+
+  	  </div> 
+
+    <%else%>
+
+     <div class="actions">
+        <%= link_to '#', id: "btn-like-disabled" do %>
+          aprovo <span class="like-icon like-disabled" aria-hidden="true"></span>
+        <% end %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to '#', id: "btn-dislike-disabled" do %>
+          não aprovo <span class="dislike-icon dislike-disabled" aria-hidden="true"></span>
+        <% end %>     
+     </div>
+
+   <%end%>
+
 <% end %>
 		
 		

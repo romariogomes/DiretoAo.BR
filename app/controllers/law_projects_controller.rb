@@ -16,6 +16,11 @@ class LawProjectsController < ApplicationController
     @acceptance_project = Acceptance.new
     @comment_form = Comment.new
     load_all_comments(params['id'])
+    load_all_acceptances(params['id'])
+
+    if (logged_in? && (!@all_acceptances.empty?))
+      load_user_acceptance
+    end
   end
 
   # GET /law_projects/new

@@ -1,5 +1,5 @@
 class Acceptance < ApplicationRecord
 	belongs_to :interaction
 
-	validates :like, presence:true
+	validates_inclusion_of :like, :in => [true, false]
 end

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get '/home' => 'home#index'
 
+  post '/like' => 'acceptances#acceptancesInterceptor'
+
   root 'home#index'
 
   get    'sign_in'   => 'sessions#new'

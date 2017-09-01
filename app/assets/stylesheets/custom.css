@@ -1,3 +1,30 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a:hover, a:visited {
+    background-color: transparent !important;
+    color: #333333 !important;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.nav.navbar-nav li a:hover {
+    background: #DDD !important;
+    border-radius: 5px;
+}
+
+nav {
+    border-radius: 5px;
+}
+
+.nav.navbar-nav li a.msg-cadastrar:hover{
+    background: transparent !important; 
+}
+
 .logo-home{
     height: 100px;
     margin-top: -45px;
@@ -27,7 +54,7 @@
 }
 
 #popin-login {
-    margin: 0 -2px 0 -258px;
+    margin: 0 -2px 0 0;
 }
 
 #all-comment-box {
@@ -39,11 +66,14 @@
     width: 20px;
     height: 20px;
     position: absolute;
-    margin-left: 3px;
 }
 
 .liked {
     background: url('like_green.png') no-repeat;
+}
+
+.like-disabled {
+    background: url('like_grey.png') no-repeat;
 }
 
 .dislike-icon {
@@ -59,6 +89,10 @@
     background: url('dislike_red.png') no-repeat;
 }
 
+.dislike-disabled {
+    background: url('dislike_grey.png') no-repeat;
+}
+
 h4 > a:hover{
     background-color: transparent;
 }
@@ -66,6 +100,23 @@ h4 > a:hover{
 .col-md-8 > a:hover {
     background-color: transparent;
 }
+
+.like-strong, .like-strong:hover {
+    font-weight: 700;
+    color: #099e3b !important;
+}
+
+.dislike-strong, .dislike-strong:hover {
+    font-weight: 700;
+    color: red !important;
+}
+
+#btn-like-disabled, #btn-dislike-disabled {
+    font-weight: 700;
+    color: #D6D6D6 !important;
+    cursor: default;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/
@@ -77,3 +128,24 @@ h4 > a:hover{
 /*#comment-box {
     height: 50px !important;
 }*/
+
+@media screen and (min-width: 765px) {
+    #popin-login {
+        width: 345px;
+    }
+    .navbar-default .navbar-nav > li > a {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    a.first-item-menu {
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .navbar-default .navbar-nav > li > a {
+        font-size: 12px;
+    }
+}
