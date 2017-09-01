@@ -45,6 +45,10 @@
 
         <%end%>
     		
+        <div>
+          <span class="badge badge-like"><%=@number_of_likes%></span>
+          <span class="badge badge-dislike"><%=@number_of_dislikes%></span>
+        </div>
 
   	  </div> 
 
@@ -60,8 +64,12 @@
         <% end %>     
      </div>
 
-   <%end%>
+    <div>
+      <span class="badge badge-like disabled"><%=@number_of_likes%></span>
+      <span class="badge badge-dislike disabled"><%=@number_of_dislikes%></span>
+    </div>
 
+   <%end%>
 <% end %>
 		
 		

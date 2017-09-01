@@ -117,6 +117,26 @@ h4 > a:hover{
     cursor: default;
 }
 
+span .badge {
+    padding: 2px 7px !important;
+    margin-top: 0px;
+    position: absolute;
+}
+
+.badge-like {
+    margin-left: 23px;
+    background-color: #099e3b !important;
+}
+
+.badge-dislike {
+    margin-left: 70px;
+    background-color: red !important;
+}
+
+.badge-like.disabled, .badge-dislike.disabled {
+    background-color: #D6D6D6 !important;   
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/
