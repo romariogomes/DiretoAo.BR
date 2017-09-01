@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params)
     @comment.interaction = @interaction
-
+    
     respond_to do |format|
       if @comment.save
         # format.html { redirect_to law_projects_path, notice: 'Comment was successfully created.' }

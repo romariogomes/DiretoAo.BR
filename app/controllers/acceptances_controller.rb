@@ -23,44 +23,36 @@ class AcceptancesController < ApplicationController
   end
 
   def acceptancesInterceptor
-
+  
     if current_user
 
       if (!check_acceptance_existent)
 
         acceptance = Acceptance.new
-        interaction = Interaction.new
-        
-        interaction.user = current_user
-        interaction.law_project = LawProject.find(params[:law_project])
-
-        interaction.save
+        create_interaction_acceptance
 
         acceptance.like = params[:like]
-        acceptance.interaction = interaction
+        acceptance.interaction = @interaction
 
         acceptance.save
         
       else
-
+        
         if params[:to_delete].nil?
           
           if @loadedAcceptance.first.like
             Acceptance.update(@loadedAcceptance.first.id, like: false)
           else
-            Acceptance.update(@loadedAcceptance.first.id, like: true)  
+            Acceptance.update(@loadedAcceptance.first.id, like: true) 
           end
 
         else
-          Acceptance.delete(@loadedAcceptance.first.id)
-          Interaction.delete(@loadedAcceptance.first.interaction_id)
+          Acceptance.destroy(@loadedAcceptance.first.id)
+          Interaction.destroy(@loadedAcceptance.first.interaction_id)
         end
         
-
       end
-
     end
-
   end
   # POST /acceptances
   # POST /acceptances.json
@@ -104,21 +96,24 @@ class AcceptancesController < ApplicationController
 
   def check_acceptance_existent
   
-    interactions = Interaction.where(user_id: current_user.id)
+    interactions = Interaction.where(user_id: current_user.id, law_project_id: params[:law_project])
 
     if interactions.blank?
-      
       return false
-
     else
-
+      
       interactions.each do |i|
-        if (!i.acceptance.nil?)
+        
+        if ((!i.acceptance.nil?) && (i.law_project_id.eql?(params[:law_project].to_i)))
           @acceptanceInteraction = i
         end
       end
-    
-      @loadedAcceptance = Acceptance.where(interaction_id: @acceptanceInteraction)
+      
+      if @acceptanceInteraction.nil?
+        return false
+      else
+        @loadedAcceptance = Acceptance.where(interaction_id: @acceptanceInteraction)
+      end
       
     end
     

@@ -9,13 +9,42 @@
     	
       <div class="actions">
 
-    		<%= link_to 'javascript:;', id: "btn-like" do %>
+        <%if (!@acceptanceUser.nil?)%>
+          
+          <%if (@acceptanceUser.acceptance.like)%>
+
+            <%= link_to 'javascript:;', id: "btn-like", class: "like-strong" do %>
+            aprovo <span class="like-icon liked" aria-hidden="true"></span>
+            <% end %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= link_to 'javascript:;', id: "btn-dislike" do %>
+              não aprovo <span class="dislike-icon" aria-hidden="true"></span>
+            <% end %>
+
+          <%else%>
+
+            <%= link_to 'javascript:;', id: "btn-like" do %>
+            aprovo <span class="like-icon" aria-hidden="true"></span>
+            <% end %>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= link_to 'javascript:;', id: "btn-dislike", class: "dislike-strong" do %>
+              não aprovo <span class="dislike-icon disliked" aria-hidden="true"></span>
+            <% end %>
+
+          <%end%>
+
+        <%else%>
+
+          <%= link_to 'javascript:;', id: "btn-like" do %>
           aprovo <span class="like-icon" aria-hidden="true"></span>
-        <% end %>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    		<%= link_to 'javascript:;', id: "btn-dislike" do %>
-          não aprovo <span class="dislike-icon" aria-hidden="true"></span>
-        <% end %>
+          <% end %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to 'javascript:;', id: "btn-dislike" do %>
+            não aprovo <span class="dislike-icon" aria-hidden="true"></span>
+          <% end %>  
+
+        <%end%>
+    		
 
   	  </div> 
 
