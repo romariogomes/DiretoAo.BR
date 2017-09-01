@@ -41,10 +41,18 @@ module LawProjectsHelper
 	def load_all_acceptances(law_project_id)
 		acceptances = load_all_interactions(law_project_id).to_a
 		
+		@number_of_likes = 0
+		@number_of_dislikes = 0
+
 		@all_acceptances = []
 		acceptances.each do |a|
 			if ((!a.acceptance.nil?) && (a.comment.nil?))
-				@all_acceptances.push(a)	
+				@all_acceptances.push(a)
+				if (a.acceptance.like == true)
+					@number_of_likes +=1
+				else
+					@number_of_dislikes +=1
+				end
 			end
 		end
 	end
