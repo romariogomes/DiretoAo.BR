@@ -137,6 +137,12 @@ span .badge {
     background-color: #D6D6D6 !important;   
 }
 
+span.badge.comments-number{
+    margin-top: -29px;
+    margin-left: 115px;
+    position: absolute;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/

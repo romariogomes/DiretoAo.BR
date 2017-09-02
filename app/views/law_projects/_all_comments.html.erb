@@ -1,4 +1,4 @@
-<h2>Comentários:</h2> (<%= @all_comments.size %>)<hr /> <br />
+<h4>Comentários</h4> <span class="badge comments-number"> <%= @all_comments.size %> </span><hr />
 <div class="container">
   <% @all_comments.each do |law_project| %>
     
@@ -12,7 +12,7 @@
           <div class="col-md-8">
             
             <div class="form-group">
-              <h4><%= law_project.comment.interaction.user.name + ' disse:' %></h4>
+              <h5><%= law_project.comment.interaction.user.name%></h5>
               
               <%= form.text_area :description, id: 'all-comment-box', class: 'form-control', disabled: :true %>  
             </div>
@@ -28,7 +28,7 @@
 
           </div>  
 
-        </div><br /> 
+        </div>
 
       <% end %>
     <% end %>
