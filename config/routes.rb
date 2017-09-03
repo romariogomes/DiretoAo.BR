@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/home' => 'home#index'
 
   post '/like' => 'acceptances#acceptancesInterceptor'
+  post '/update-comment' => 'comments#updateComment'
 
   root 'home#index'
 

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /comments
@@ -21,6 +22,14 @@ class CommentsController < ApplicationController
   def edit
   end
 
+  def updateComment
+    Comment.update(params[:comment_id], description: params[:comment])
+
+    respond_to do |format|
+      format.html { redirect_to '/law_projects/'+params[:law_project].to_s }
+    end
+  end
+  
   # POST /comments
   # POST /comments.json
   def create
@@ -33,7 +42,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         # format.html { redirect_to law_projects_path, notice: 'Comment was successfully created.' }
-        format.html { redirect_to '/law_projects/'+@interaction.law_project_id.to_s, notice: 'Comment was successfully created.' }
+        format.html { redirect_to '/law_projects/'+@interaction.law_project_id.to_s}
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -61,7 +70,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to '/law_projects/'+@comment.interaction.law_project_id.to_s, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to '/law_projects/'+@comment.interaction.law_project_id.to_s}
       format.json { head :no_content }
     end
   end

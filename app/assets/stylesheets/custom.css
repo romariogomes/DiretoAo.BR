@@ -57,9 +57,9 @@ nav {
     margin: 0 -2px 0 0;
 }
 
-#all-comment-box {
+/*.all-comment-box {
     height: 100px !important;
-}
+}*/
 
 .like-icon {
     background: url('like_black.png') no-repeat;
@@ -141,6 +141,10 @@ span.badge.comments-number{
     margin-top: -29px;
     margin-left: 115px;
     position: absolute;
+}
+
+a.btnSaveComment{
+    display: none;
 }
 
 /*textarea.form-control {

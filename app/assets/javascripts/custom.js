@@ -9,8 +9,11 @@ var Custom = {
     },
 
     autosizeInput : function() {
-    	$('#comment-box').autosize();
-    	$('#law_project_description').autosize();
+    	// $('#comment-box').autosize();
+    	// $('#law_project_description').autosize();
+        $.each($('textarea'), function( index, value ) {
+            $(this).autosize();
+        });
 	},
 
 	bindEvents : function() {
@@ -82,11 +85,47 @@ var Custom = {
     		}
 
             $.ajax({
-                  type: 'POST',
-                  url: '/like',
-                  data: data,
+                type: 'POST',
+                url: '/like',
+                data: data,
                 contentType: 'application/json; charset=utf-8'
-                });
-    	});    	
+            });
+    	});
+
+        $('.btnEditComment').click(function() { 
+
+            const btnEdit = $(this);
+            const divPai = btnEdit.closest(".comment-item");
+            const id = divPai.data("id");
+            
+            btnEdit.hide();
+            $('textarea#'+id).attr('disabled', false);
+            $('a#'+id+'.btnSaveComment').show();
+        });
+
+        $('.btnSaveComment').click(function() {
+            
+            var path = location.pathname.split('/');
+
+            const btnEdit = $(this);
+            const divPai = btnEdit.closest(".comment-item");
+            const id = divPai.data("id");
+
+            commentId = id;
+            newComment = $('textarea#'+id).val();
+
+            $('textarea#'+id).attr('disabled', true);
+            $('a#'+id+'.btnSaveComment').hide();
+            btnEdit.show();
+
+            var data = JSON.stringify({ comment_id: commentId, comment: newComment, law_project: path[path.length-1] });
+
+            $.ajax({
+                type: 'POST',
+                url: '/update-comment',
+                data: data,
+                contentType: 'application/json; charset=utf-8'
+            });
+        });
 	}
 }
