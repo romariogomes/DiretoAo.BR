@@ -1,35 +1,36 @@
-<h2>Comentários:</h2> (<%= @all_comments.size %>)<hr /> <br />
+<h4>Comentários</h4> <span class="badge comments-number"> <%= @all_comments.size %> </span><hr />
 <div class="container">
   <% @all_comments.each do |law_project| %>
     
     <%if !law_project.comment.nil? %>
 
-      <%= form_for law_project.comment, :url => { :controller => "comments", :action => "create" }, :html => {:method => :post}, local: true do |form|  %>
+      <%= form_for law_project.comment, :url => { :controller => "comments", :action => "updateComment" }, :html => {:method => :post, :id => "form-edit-comment"}, local: true do |form|  %>
       
         <%= form.hidden_field :law_project_id, :value => params['id'] %>
         
         <div class="row">
+          
           <div class="col-md-8">
             
-            <div class="form-group">
-              <h4><%= law_project.comment.interaction.user.name + ' disse:' %></h4>
+            <div class="form-group comment-item" data-id="<%=law_project.comment.id.to_s%>">
               
-              <%= form.text_area :description, id: 'all-comment-box', class: 'form-control', disabled: :true %>  
+              <h5><%= law_project.comment.interaction.user.name%></h5>
+              
+              <%= form.text_area :description, id: law_project.comment.id.to_s, class: 'form-control', disabled: :true %> <br />
+
+              <% if (logged_in? && current_user.name.eql?(law_project.comment.interaction.user.name)) %>
+
+                <%= form.hidden_field :comment_id, :value => law_project.comment.id %>        
+                
+                <%= link_to 'Salvar alterações', '#', id: law_project.comment.id.to_s, class: 'btnSaveComment', :data => {:comment_id => law_project.comment.id.to_s}%>
+
+                <%= link_to 'Editar comentário', 'javascript:;', id: law_project.comment.id.to_s, class: 'btnEditComment' %> &nbsp &nbsp | &nbsp &nbsp
+
+                <%= link_to 'Remover comentário', comment_path(law_project.comment.id), method: :delete %>
+              <% end %>
             </div>
-
-          <% if (logged_in? && current_user.name.eql?(law_project.comment.interaction.user.name)) %>
-
-            <%= form.hidden_field :law_project_id, :value => law_project.comment.id %>
-
-            <%= link_to 'Editar comentário', edit_comment_path(law_project.comment.id) %> &nbsp &nbsp | &nbsp &nbsp
-
-            <%= link_to 'Remover comentário', comment_path(law_project.comment.id), method: :delete %>
-          <% end %>
-
           </div>  
-
-        </div><br /> 
-
+        </div>
       <% end %>
     <% end %>
   <% end %>
