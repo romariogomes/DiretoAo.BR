@@ -16,3 +16,5 @@
 //= require bootstrap-sprockets
 //= require jquery.autosize
 //= require custom.js
+//= require d3
+//= require sequences.js
