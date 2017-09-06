@@ -8,6 +8,19 @@ var width = 750;
 var height = 600;
 var radius = Math.min(width, height) / 2;
 
+// d3.select(window)
+//   .on("resize", function() {
+//     chart = d3.select('#chart');
+//     var targetWidth = chart.node().getBoundingClientRect().width;
+//     var targetHeight = chart.node().getBoundingClientRect().height;
+//     var radius = Math.min(targetWidth, targetHeight) / 2;
+//     chart.attr("width", targetWidth);
+//     chart.attr("height", targetWidth / radius);
+
+//     var width = targetWidth;
+//     var height = targetHeight;
+// });
+
 // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
 var b = {
   w: 75, h: 30, s: 3, t: 10
@@ -15,12 +28,16 @@ var b = {
 
 // Mapping of step names to colors.
 var colors = {
-  "home": "#5687d1",
-  "product": "#7b615c",
-  "search": "#de783b",
-  "account": "#6ab975",
-  "other": "#a173d1",
-  "end": "#bbbbbb"
+  "DIREITA": "#5687d1",
+  "ESQUERDA": "#7b615c",
+  "PMDB": "#de783b",
+  "PT": "#6ab975",
+  "PSDB": "#a173d1",
+  "PSOL": "#bbbbbb",
+  "LULA": "#bbbbbb",
+  "EDUARDO_CUNHA": "#bbbbbb",
+  "AECIO_NEVER": "#bbbbbb",
+  "MARCELO_FREIXO": "#bbbbbb",
 };
 
 // Total size of all segments; we set this later, after loading the data.
@@ -44,7 +61,7 @@ var arc = d3.arc()
 
 // Use d3.text and d3.csvParseRows so that we do not need to have a header
 // row, and can receive the csv as an array of arrays.
-d3.text("../teste.csv", function(text) {
+d3.text("../diretoaopontobr.csv", function(text) {
   var csv = d3.csvParseRows(text);
   var json = buildHierarchy(csv);
   createVisualization(json);
