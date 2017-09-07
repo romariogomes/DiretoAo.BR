@@ -6,7 +6,7 @@ function initialize() {
    Custom.init(); 
 };
 
-$(document).on('page:load', initialize);
+$(document).on('page:load', initialize());
 
 var Custom = {
     init: function() {
