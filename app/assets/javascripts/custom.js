@@ -2,12 +2,6 @@ $(document).ready(function() {
     Custom.init();
 });
 
-// function initialize() {
-//    Custom.init(); 
-// };
-
-// $(document).on('page:load', initialize());
-
 var Custom = {
     init: function() {
         this.autosizeInput();
