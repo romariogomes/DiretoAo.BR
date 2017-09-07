@@ -1,7 +1,7 @@
 $(document).ready(function() {
     Custom.init();
 });
-$(document).on('page:load', Custom.init;
+$(document).on('page:load', Custom.init());
 
 var Custom = {
     init: function() {
