@@ -1,7 +1,12 @@
 $(document).ready(function() {
     Custom.init();
 });
-$(document).on('page:load', Custom.init());
+
+function initialize() {
+   Custom.init(); 
+};
+
+$(document).on('page:load', initialize);
 
 var Custom = {
     init: function() {
