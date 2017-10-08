@@ -8,16 +8,17 @@ class RankingController < ApplicationController
 		
 		interactions = Interaction.where(user_id: current_user.id)
 		acceptancesList = Array.new
+		politicianList = Array.new
 		
 		interactions.each do |i|
 	        
         	if (!i.acceptance.nil?)
           		acceptancesList.push(i)
+
           	end
         end
 
-        writeFile(acceptancesList)
-      
+        countPolitician(acceptancesList)      
 
 	end
 
@@ -29,33 +30,45 @@ class RankingController < ApplicationController
 	     end
     end
 
-    def writeFile(acceptancesList)
-
+    def countPolitician(acceptancesList)
     	
-    	file = File.new "public/aeo.csv", "w"
+    	politiciansCount = Hash.new
 
-    	if ( !(acceptancesList.empty?) &&  !(acceptancesList.nil?) )
+    	acceptancesList.each do |a|
+	    	if politiciansCount.has_key?(a.law_project.politicians.first.name)
+	    		politiciansCount[a.law_project.politicians.first.name] = politiciansCount.values_at(a.law_project.politicians.first.name)[0]+1
+	    	else
+	    		politiciansCount.store(a.law_project.politicians.first.name, 1)
+	    	end	
+        end
 
-    		acceptancesList.each do |a|
-			    require 'pry'
-			    binding.pry
-		    	file.puts a.law_project.politicians.first.party, a.law_project.politicians.first.name, "\n"
-		        	
+        mountFile(acceptancesList, politiciansCount)
+    end
+
+    def mountFile(acceptancesList, politiciansCount)
+    	lines = Array.new
+    	
+    	politiciansCount.each {|key, value| 
+    		politician = Politician.where(name: key).first
+    		lines.push(politician.party+"-"+politician.name+","+value.to_s) 
+    	}
+
+    	writeFile(lines)
+
+    end
+
+    def writeFile(lines)
+
+    	file = File.new "public/politicianAccepted.csv", "w"
+
+    	if ( !(lines.empty?) &&  !(lines.nil?) )
+    		
+    		lines.each do |a|			    
+		    	file.puts a
 		    end
 
-	    # 	file = "aeo.txt"
-		  	# File.open(file, "w") do |csv|
-				  	
-		   #  	acceptancesList.each do |a|
-			        
-		   #  		csv << [a.law_project.politicians.first.party, a.law_project.politicians.first.name, "\n"]       
-		        	
-		   #      end
-	  		# end	
+	  		file.close
 	    end
-    	
-    	
-
     	
     end
 end
