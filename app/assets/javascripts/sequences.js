@@ -1,7 +1,4 @@
 $(document).ready(function(){
-  // Hack to make this example display correctly in an iframe on bl.ocks.org
-  d3.select(self.frameElement).style("height", "700px");
-});
 
 // Dimensions of sunburst.
 var width = 750;
@@ -37,7 +34,7 @@ var colors = {
   "LULA": "#bbbbbb",
   "EDUARDO_CUNHA": "#bbbbbb",
   "AECIO_NEVER": "#bbbbbb",
-  "MARCELO_FREIXO": "#bbbbbb",
+  "MARCELO_FREIXO": "#bbbbbb"
 };
 
 // Total size of all segments; we set this later, after loading the data.
@@ -61,6 +58,14 @@ var arc = d3.arc()
 
 // Use d3.text and d3.csvParseRows so that we do not need to have a header
 // row, and can receive the csv as an array of arrays.
+
+// ARQUIVO DEFINITIVO
+// d3.text("../politicianAccepted.csv", function(text) {
+//   var csv = d3.csvParseRows(text);
+//   var json = buildHierarchy(csv);
+//   createVisualization(json);
+// });
+
 d3.text("../diretoaopontobr.csv", function(text) {
   var csv = d3.csvParseRows(text);
   var json = buildHierarchy(csv);
@@ -318,3 +323,7 @@ function buildHierarchy(csv) {
   }
   return root;
 };
+
+  // Hack to make this example display correctly in an iframe on bl.ocks.org
+  d3.select(self.frameElement).style("height", "700px");
+});
