@@ -147,6 +147,10 @@ a.btnSaveComment{
     display: none;
 }
 
+#ranking-content h1 {
+    text-align: center;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/

@@ -1,7 +1,9 @@
 class RankingController < ApplicationController
 
 	def index
-		loadRanking
+        if !(current_user.nil?)
+            loadRanking    
+        end
 	end
 
 	def loadRanking
