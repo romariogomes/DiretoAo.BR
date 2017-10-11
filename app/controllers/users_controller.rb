@@ -21,6 +21,9 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def politicSpectre
+  end
+
   # POST /users
   # POST /users.json
   def create

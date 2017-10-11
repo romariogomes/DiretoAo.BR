@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/ranking' => 'ranking#index'
   get 'ranking/data', :defaults => { :format => 'json' }
 
+  get '/users/politicSpectre' => 'users#politicSpectre'
+
   post '/like' => 'acceptances#acceptancesInterceptor'
   post '/update-comment' => 'comments#updateComment'
 
