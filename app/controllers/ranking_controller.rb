@@ -2,10 +2,12 @@ class RankingController < ApplicationController
 
 	def index
 
-        # @lawProjectsCount = countAllPoliticianLaws
-        
         if @lawProjectsAcceptancesCount.nil?
             @lawProjectsAcceptancesCount = countAllPoliticianLawsAcceptances    
+        end
+
+        if @orderedByProjectsNumber.nil?
+            @orderedByProjectsNumber = countAllPoliticianLaws.sort_by{|key,value| value}.reverse
         end
 
         if !(current_user.nil?)
@@ -32,11 +34,11 @@ class RankingController < ApplicationController
 	end
 
 	def data
-	     respond_to do |format|
-	      format.json {
-	       render :json => [1,2,3,4,5]
-	        }
-	     end
+        respond_to do |format|
+          format.json {
+           render :json => [1,2,3,4,5]
+            }
+        end
     end
 
     def countPolitician(acceptancesList)
@@ -84,19 +86,16 @@ class RankingController < ApplicationController
     def countAllPoliticianLaws
         
         # method that return the quantity of law projects created by politicians
-
-        lawProjects = LawProject.all
-        lawProjectsCount = Hash.new
-
-        lawProjects.each do |l|
-            if lawProjectsCount.has_key?(l.politicians.first.name)
-                lawProjectsCount[l.politicians.first.name] = lawProjectsCount.values_at(l.politicians.first.name)[0]+1
-            else
-                lawProjectsCount.store(l.politicians.first.name, 1)
-            end 
+        
+        numberOfProjects = Hash.new
+        lawProjectsCount = @lawProjectsAcceptancesCount
+        
+        lawProjectsCount.each do |key, value|
+          numberOfProjects.store(key, value.size)
         end
+        
+        return numberOfProjects
 
-        return lawProjectsCount
     end
 
     def countAllPoliticianLawsAcceptances
