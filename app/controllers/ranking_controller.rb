@@ -1,6 +1,13 @@
 class RankingController < ApplicationController
 
 	def index
+
+        # @lawProjectsCount = countAllPoliticianLaws
+        
+        if @lawProjectsAcceptancesCount.nil?
+            @lawProjectsAcceptancesCount = countAllPoliticianLawsAcceptances    
+        end
+
         if !(current_user.nil?)
             loadRanking    
         end
@@ -73,4 +80,87 @@ class RankingController < ApplicationController
 	    end
     	
     end
+
+    def countAllPoliticianLaws
+        
+        # method that return the quantity of law projects created by politicians
+
+        lawProjects = LawProject.all
+        lawProjectsCount = Hash.new
+
+        lawProjects.each do |l|
+            if lawProjectsCount.has_key?(l.politicians.first.name)
+                lawProjectsCount[l.politicians.first.name] = lawProjectsCount.values_at(l.politicians.first.name)[0]+1
+            else
+                lawProjectsCount.store(l.politicians.first.name, 1)
+            end 
+        end
+
+        return lawProjectsCount
+    end
+
+    def countAllPoliticianLawsAcceptances
+
+        # method to count all law projects acceptances
+
+        allAcceptances = Acceptance.all
+        lawProjectsCount = Hash.new
+
+        allAcceptances.each do |a|
+
+            startHash = {
+              :acceptances => {:like => 0, :dislike => 0}
+            }
+
+            politicianName = (a.interaction.law_project.politicians.first.name).to_sym
+            lawProjectId = a.interaction.law_project.id
+
+            if lawProjectsCount.has_key?(politicianName)
+
+                if !(lawProjectsCount[politicianName].has_key?(a.interaction.law_project.id))
+                    lawProjectsCount[politicianName].store(lawProjectId, startHash)                  
+                end
+            else
+                lawProjectsCount.store(politicianName, lawProjectId => startHash)
+            end 
+            
+            lawProjectsCount = incrementAcceptance(a, lawProjectsCount)
+        end
+
+        return lawProjectsCount
+    end
+
+    def incrementAcceptance(acceptance, hash)
+
+        politicianName = (acceptance.interaction.law_project.politicians.first.name).to_sym
+        lawProjectId = acceptance.interaction.law_project.id
+        valueLike = hash[politicianName][lawProjectId][:acceptances][:like]
+        valueDislike = hash[politicianName][lawProjectId][:acceptances][:dislike]
+
+        if acceptance.like
+           hash[politicianName][lawProjectId][:acceptances][:like] = valueLike+=1
+        else
+           hash[politicianName][lawProjectId][:acceptances][:dislike] = valueDislike+=1 
+        end
+
+        return hash
+    end
+
+    def sortByProjectsCreated
+
+        if (!@lawProjectsCount.nil? || !@lawProjectsCount.empty?)
+            @rankingNumberOfProjects = lawProjectsCount.sort_by { |name, value| value }
+        end
+        
+    end
+
+    def sortByProjectsAcceptance
+        
+        if (!@lawProjectsCount.nil? || !@lawProjectsCount.empty?)
+            
+        end
+
+    end
+
+
 end
