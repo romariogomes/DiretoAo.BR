@@ -6,9 +6,17 @@ class RankingController < ApplicationController
             @lawProjectsAcceptancesCount = countAllPoliticianLawsAcceptances    
         end
 
-        if @orderedByProjectsNumber.nil?
-            @orderedByProjectsNumber = countAllPoliticianLaws.sort_by{|key,value| value}.reverse
-        end
+        require 'pry'
+
+        if @rankingByAcceptanceAverage.nil?
+            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort.reverse
+        end    
+
+        binding.pry    
+
+        # if @rankingByProjectsNumber.nil?
+        #     @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
+        # end
 
         if !(current_user.nil?)
             loadRanking    
@@ -57,6 +65,7 @@ class RankingController < ApplicationController
     end
 
     def mountFile(acceptancesList, politiciansCount)
+
     	lines = Array.new
     	
     	politiciansCount.each {|key, value| 
@@ -81,21 +90,6 @@ class RankingController < ApplicationController
 	  		file.close
 	    end
     	
-    end
-
-    def countAllPoliticianLaws
-        
-        # method that return the quantity of law projects created by politicians
-        
-        numberOfProjects = Hash.new
-        lawProjectsCount = @lawProjectsAcceptancesCount
-        
-        lawProjectsCount.each do |key, value|
-          numberOfProjects.store(key, value.size)
-        end
-        
-        return numberOfProjects
-
     end
 
     def countAllPoliticianLawsAcceptances
@@ -147,19 +141,48 @@ class RankingController < ApplicationController
 
     def sortByProjectsCreated
 
-        if (!@lawProjectsCount.nil? || !@lawProjectsCount.empty?)
-            @rankingNumberOfProjects = lawProjectsCount.sort_by { |name, value| value }
+        # method that return the quantity of law projects created by politicians
+        
+        numberOfProjects = Hash.new
+        lawProjectsCount = @lawProjectsAcceptancesCount
+        
+        lawProjectsCount.each do |key, value|
+          numberOfProjects.store(key, value.size)
         end
+        
+        return numberOfProjects
         
     end
 
-    def sortByProjectsAcceptance
+    def sortByAverageOfAcceptances
         
-        if (!@lawProjectsCount.nil? || !@lawProjectsCount.empty?)
-            
+        allProjectsAverage = Hash.new
+        eachProjectAverage = Hash.new
+        lawProjectsCount = @lawProjectsAcceptancesCount
+
+        lawProjectsCount.each do |key, value|
+          
+          numberOfProjects = value.size
+
+          value.each do |k,v|
+            acceptanceAverage = (v[:acceptances][:like].to_f/(v[:acceptances][:like]+v[:acceptances][:dislike]))*100
+            eachProjectAverage.store(value.keys[0], acceptanceAverage)
+          end
+
+          sumOfAverage = 0
+
+          eachProjectAverage.each do |lawProjectId, average|
+            sumOfAverage = sumOfAverage+=average
+          end
+
+          allProjectsAverage.store(key, (sumOfAverage/eachProjectAverage.size).round(2))
+
+          eachProjectAverage.clear
+
         end
 
-    end
+        return allProjectsAverage
 
+    end
 
 end
