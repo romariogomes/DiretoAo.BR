@@ -151,6 +151,31 @@ a.btnSaveComment{
     text-align: center;
 }
 
+#ranking-template {
+    width: 90%;
+    margin: auto;
+}
+
+#ranking-template th, #ranking-template td{
+    vertical-align: inherit;
+    text-align: center;
+} 
+
+#ranking-template td.row-order-number h3 {
+    margin: auto;
+    text-align: center
+}
+
+#ranking-template th.row-politician-name, #ranking-template td.row-politician-name{
+    width: 60%;
+}
+
+#ranking-template th.row-order-number, #ranking-template td.row-order-number {
+    width: 10%;
+}
+
+
+
 /*textarea.form-control {
     height: 250px;
 }*/
