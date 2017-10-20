@@ -2,35 +2,22 @@ class RankingController < ApplicationController
 
 	def index
 
-        if @allUserAcceptances.nil?
-            @allUserAcceptances = load_all_user_acceptances
-        end
-        
-        if @userAcceptancesCount.nil?
-            @userAcceptancesCount = sortByUserAcceptances
-        end
-
         if @lawProjectsAcceptancesCount.nil?
             @lawProjectsAcceptancesCount = countAllPoliticianLawsAcceptances    
         end
 
-        
-
-        if @rankingByAcceptanceAverage.nil?
-            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort.reverse
-        end    
-
-
-        if @rankingByProjectsNumber.nil?
-            @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
-        end
+        if @allUserAcceptances.nil?
+            @allUserAcceptances = load_all_user_acceptances
+        end 
 
         if !(current_user.nil?)
-            loadRanking    
+            loadPrivateRankings
+        else
+            loadOpenRankings
         end
 	end
 
-	def loadRanking
+	def loadGraphic
 		
 		interactions = Interaction.where(user_id: current_user.id)
 		acceptancesList = Array.new
@@ -253,6 +240,28 @@ class RankingController < ApplicationController
 
     def load_all_user_interactions
         return Interaction.where(user_id: current_user.id) if !current_user.nil?
+    end
+
+    def loadOpenRankings
+
+        if @rankingByAcceptanceAverage.nil?
+            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort.reverse
+        end    
+
+        if @rankingByProjectsNumber.nil?
+            @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
+        end
+        
+    end
+
+    def loadPrivateRankings
+
+        if @userAcceptancesCount.nil?
+            @userAcceptancesCount = sortByUserAcceptances
+        end
+        
+        loadGraphic
+
     end
 
 end
