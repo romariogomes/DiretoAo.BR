@@ -141,7 +141,7 @@ class RankingController < ApplicationController
 
     def sortByProjectsCreated
 
-        # method that return the quantity of law projects created by politicians
+        # method that rank the politicians by number of law projects created
         
         numberOfProjects = Hash.new
         lawProjectsCount = @lawProjectsAcceptancesCount
@@ -156,6 +156,8 @@ class RankingController < ApplicationController
 
     def sortByAverageOfAcceptances
         
+        # method that rank the politicians by acceptances average on law projects
+
         allProjectsAverage = Hash.new
         eachProjectAverage = Hash.new
         lawProjectsCount = @lawProjectsAcceptancesCount
