@@ -2,21 +2,28 @@ class RankingController < ApplicationController
 
 	def index
 
+        if @allUserAcceptances.nil?
+            @allUserAcceptances = load_all_user_acceptances
+        end
+        
+        if @userAcceptancesCount.nil?
+            @userAcceptancesCount = sortByUserAcceptances
+        end
+
         if @lawProjectsAcceptancesCount.nil?
             @lawProjectsAcceptancesCount = countAllPoliticianLawsAcceptances    
         end
 
-        require 'pry'
+        
 
         if @rankingByAcceptanceAverage.nil?
             @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort.reverse
         end    
 
-        binding.pry    
 
-        # if @rankingByProjectsNumber.nil?
-        #     @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
-        # end
+        if @rankingByProjectsNumber.nil?
+            @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
+        end
 
         if !(current_user.nil?)
             loadRanking    
@@ -185,6 +192,67 @@ class RankingController < ApplicationController
 
         return allProjectsAverage
 
+    end
+
+    def sortByUserAcceptances
+        
+        # method that rank the politicians by users acceptances (recommendations)
+        
+        allUserAcceptances = Hash.new
+
+        @allUserAcceptances.each do |ua|
+            
+            initHash = {
+              :acceptances => {:like => 0, :dislike => 0}
+            }
+
+            politicianName = (ua.interaction.law_project.politicians.first.name).to_sym
+
+            if !(allUserAcceptances.has_key?(politicianName))
+                allUserAcceptances.store(politicianName, initHash)
+            end 
+            
+            allUserAcceptances = incrementUserAcceptances(ua, allUserAcceptances)
+        end
+        
+        return allUserAcceptances
+
+    end
+
+    def incrementUserAcceptances(acceptance, hash)
+
+        politicianName = (acceptance.interaction.law_project.politicians.first.name).to_sym
+        valueLike = hash[politicianName][:acceptances][:like]
+        valueDislike = hash[politicianName][:acceptances][:dislike]
+
+        if acceptance.like
+           hash[politicianName][:acceptances][:like] = valueLike+=1
+        else
+           hash[politicianName][:acceptances][:dislike] = valueDislike+=1 
+        end
+
+        return hash
+    end
+
+    def load_all_user_acceptances
+        
+        userInteractions = load_all_user_interactions
+        allUserAcceptances = Array.new
+
+        if (!userInteractions.nil? || !userInteractions.empty?)
+            
+            userInteractions.each do |ui|
+                if ((!ui.acceptance.nil?) && (ui.comment.nil?))
+                    allUserAcceptances.push(ui.acceptance)
+                end
+            end
+        end
+
+        return allUserAcceptances
+    end
+
+    def load_all_user_interactions
+        return Interaction.where(user_id: current_user.id) if !current_user.nil?
     end
 
 end
