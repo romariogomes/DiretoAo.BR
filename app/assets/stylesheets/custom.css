@@ -174,7 +174,18 @@ a.btnSaveComment{
     width: 10%;
 }
 
+#ranking-template th.row-politician-photo, #ranking-template td.row-politician-photo {
+    width: 10%;
+}
 
+#ranking-template td.row-politician-photo span.photo {
+    display: block;
+    background-color: red;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
 
 /*textarea.form-control {
     height: 250px;
