@@ -1,0 +1,77 @@
+<div class="container">
+    
+    <h1>Ranking</h1>
+
+    <ul class="nav nav-tabs nav-justified"> 
+      <li role="presentation" id="by-acceptances" class="active"><a>Aceitação em projetos</a></li> 
+      <li role="presentation" id="by-qtd-projetos"><a>Quantidade de projetos</a></li>
+    </ul>
+
+    <table id="ranking-template" class="table table-hover table-responsive">
+    <thead>
+      <tr>
+        <th class="row-order-number">Posição</th>
+        <th class="row-politician-photo"></th>
+        <th class="row-politician-name">Deputado</th>
+        <th>Pontuação</th>
+      </tr>
+    </thead>
+
+    <tbody id="table-for-acceptances">
+        
+        <% @rankingByAcceptanceAverage.each_with_index do |key, index| %>
+          
+          <tr>
+            <td class="row-order-number">
+              <h3><%= index+1 %></h3>
+            </td>
+            <td class="row-politician-photo"><span class="photo"></span></td>
+            <td class="row-politician-name"><%= key[0].to_s %></td>
+            <td><%= key[1].to_s + " %"%></td>
+          </tr>
+
+        <% end %>
+      
+    </tbody>
+
+    <tbody id="table-for-projects-count" style="display: none;">
+        
+        <% @rankingByProjectsNumber.each_with_index do |key, index| %>
+          
+          <tr>
+            <td class="row-order-number">
+              <h3><%= index+1 %></h3>
+            </td>
+            <td class="row-politician-photo"><span class="photo"></span></td>
+            <td class="row-politician-name"><%= key[0].to_s %></td>
+            <td><%= key[1].to_s%></td>
+          </tr>
+
+        <% end %>
+      
+    </tbody>
+
+  </table><br>
+
+  <h5 id="modal-trigger" data-toggle="modal" data-target="#myModal"><b>*</b> Entenda como funciona</h5>
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Ranking por aceitação em projetos</h4>
+        </div>
+        <div class="modal-body">
+          <p>HUEBRBR FIXED</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  
+

@@ -147,6 +147,55 @@ a.btnSaveComment{
     display: none;
 }
 
+#ranking-content h1 {
+    text-align: center;
+}
+
+#ranking-template {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#ranking-template th, #ranking-template td{
+    vertical-align: inherit;
+    text-align: center;
+} 
+
+#ranking-template td.row-order-number h3 {
+    margin: auto;
+    text-align: center
+}
+
+#ranking-template th.row-politician-name, #ranking-template td.row-politician-name{
+    width: 60%;
+}
+
+#ranking-template th.row-order-number, #ranking-template td.row-order-number {
+    width: 10%;
+}
+
+#ranking-template th.row-politician-photo, #ranking-template td.row-politician-photo {
+    width: 10%;
+}
+
+#ranking-template td.row-politician-photo span.photo {
+    display: block;
+    background-color: red;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+ul.nav.nav-tabs.nav-justified li.active a{
+    background: #e7e7e7 !important;
+}
+
+ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
+    cursor: pointer;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/

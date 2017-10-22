@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   get '/home' => 'home#index'
+  
+  get '/ranking' => 'ranking#index'
+  get 'ranking/data', :defaults => { :format => 'json' }
 
   post '/like' => 'acceptances#acceptancesInterceptor'
   post '/update-comment' => 'comments#updateComment'

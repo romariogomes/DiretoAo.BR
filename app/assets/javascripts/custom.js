@@ -127,5 +127,43 @@ var Custom = {
                 contentType: 'application/json; charset=utf-8'
             });
         });
+
+        $('#by-acceptances').click(function() { 
+
+            var that = $('#by-qtd-projetos');
+
+            if (that.hasClass('active')) {
+                that.removeClass('active')    
+            }
+
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active')    
+            }
+
+            $('tbody#table-for-projects-count').hide();
+            $('tbody#table-for-acceptances').show();
+
+            $('.modal-title').html("Ranking por aceitação em projetos");
+            $('.modal-body').html("HUEBR");
+        });
+
+        $('#by-qtd-projetos').click(function() { 
+
+            var that = $('#by-acceptances');
+
+            if (that.hasClass('active')) {
+                that.removeClass('active')  
+            }
+
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active')    
+            }
+
+            $('tbody#table-for-acceptances').hide();
+            $('tbody#table-for-projects-count').show();
+
+            $('.modal-title').html("Ranking por quantidade de projetos");
+            $('.modal-body').html("HUEBR 2");
+        });
 	}
 }
