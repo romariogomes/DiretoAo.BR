@@ -192,7 +192,7 @@ ul.nav.nav-tabs.nav-justified li.active a{
     background: #e7e7e7 !important;
 }
 
-ul.nav.nav-tabs.nav-justified li a:hover{
+ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     cursor: pointer;
 }
 

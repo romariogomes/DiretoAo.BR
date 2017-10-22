@@ -139,6 +139,12 @@ var Custom = {
             if (!$(this).hasClass('active')) {
                 $(this).addClass('active')    
             }
+
+            $('tbody#table-for-projects-count').hide();
+            $('tbody#table-for-acceptances').show();
+
+            $('.modal-title').html("Ranking por aceitação em projetos");
+            $('.modal-body').html("HUEBR");
         });
 
         $('#by-qtd-projetos').click(function() { 
@@ -146,12 +152,18 @@ var Custom = {
             var that = $('#by-acceptances');
 
             if (that.hasClass('active')) {
-                that.removeClass('active')    
+                that.removeClass('active')  
             }
 
             if (!$(this).hasClass('active')) {
                 $(this).addClass('active')    
             }
+
+            $('tbody#table-for-acceptances').hide();
+            $('tbody#table-for-projects-count').show();
+
+            $('.modal-title').html("Ranking por quantidade de projetos");
+            $('.modal-body').html("HUEBR 2");
         });
 	}
 }

@@ -12,9 +12,9 @@ class RankingController < ApplicationController
 
         if !(current_user.nil?)
             loadPrivateRankings
-        else
-            loadOpenRankings
         end
+
+        loadOpenRankings
 
         render '_ranking_template'
 	end
