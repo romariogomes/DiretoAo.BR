@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/home' => 'home#index'
   
   get '/ranking' => 'ranking#index'
+  get '/acceptancesChart' => 'ranking#loadGraphic'
+  get '/politicalSpectre' => 'ranking#spectreChart'
   get 'ranking/data', :defaults => { :format => 'json' }
 
   post '/like' => 'acceptances#acceptancesInterceptor'

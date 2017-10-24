@@ -17,24 +17,28 @@ class RankingController < ApplicationController
 
         loadOpenRankings
 
-        render '_ranking_template'
+        # render '_ranking_template'
 	end
 
 	def loadGraphic
 		
-		interactions = Interaction.where(user_id: current_user.id)
-		acceptancesList = Array.new
-		politicianList = Array.new
-		
-		interactions.each do |i|
-	        
-        	if (!i.acceptance.nil?)
-          		acceptancesList.push(i)
+        if !(current_user.nil?)
+            
+            interactions = Interaction.where(user_id: current_user.id)
+            acceptancesList = Array.new
+            politicianList = Array.new
+            
+            interactions.each do |i|
+                
+                if (!i.acceptance.nil?)
+                    acceptancesList.push(i)
+                end
+            end
 
-          	end
+            countPolitician(acceptancesList)      
         end
 
-        countPolitician(acceptancesList)      
+        render 'like_chart'    
 
 	end
 
@@ -262,8 +266,6 @@ class RankingController < ApplicationController
         if @userAcceptancesCount.nil?
             @userAcceptancesCount = sortByUserAcceptances
         end
-        
-        loadGraphic
 
     end
 

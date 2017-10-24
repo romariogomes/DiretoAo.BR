@@ -1,32 +1,5 @@
 <div class="container">
-    
-    <% if current_user.nil?%>
-      
-      <h1>Faça login para visualizar</h1>
-
-    <% else %>
-      
-      <div id="ranking-content">
-
-        <h1>Com base nas suas curtidas</h1>
-
-        <div id="sequence"></div>
-        <div id="chart">
-          <div id="explanation" style="visibility: hidden;">
-            <span id="percentage"></span><br/>
-            das suas curtidas
-          </div>
-        </div>
-
-      </div>
-
-      <div id="sidebar">
-        <input type="checkbox" id="togglelegend"> Legend<br/>
-        <div id="legend" style="visibility: hidden;"></div>
-      </div>
-
-  <% end %>
-
+    <%= render partial: "ranking_template" %>
 </div>
   
 
