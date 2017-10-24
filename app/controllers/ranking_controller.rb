@@ -6,11 +6,12 @@ class RankingController < ApplicationController
             @lawProjectsAcceptancesCount = countAllPoliticianLawsAcceptances    
         end
 
-        if @allUserAcceptances.nil?
-            @allUserAcceptances = load_all_user_acceptances
-        end 
-
         if !(current_user.nil?)
+
+            if @allUserAcceptances.nil?
+                @allUserAcceptances = load_all_user_acceptances
+            end 
+            
             loadPrivateRankings
         end
 
