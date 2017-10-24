@@ -1,0 +1,14 @@
+[
+    {
+        "question": "Activity One",
+        "answer": "Some answer",
+        "value": 5,
+        "consequence": 1
+    },
+    {
+        "question": "Activity Two",
+        "answer": "Some answer",
+        "value": 4,
+        "consequence": 4
+    }
+]
