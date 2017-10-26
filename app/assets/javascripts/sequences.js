@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
 // Dimensions of sunburst.
-var width = 750;
-var height = 600;
+var width = $(window).width()/1.5;
+var height = $(window).height()/1.5;
 var radius = Math.min(width, height) / 2;
 
 // d3.select(window)
@@ -324,6 +324,9 @@ function buildHierarchy(csv) {
   return root;
 };
 
+  $(window).resize(function() {
+    location.reload();
+  });
   // Hack to make this example display correctly in an iframe on bl.ocks.org
   d3.select(self.frameElement).style("height", "700px");
 });

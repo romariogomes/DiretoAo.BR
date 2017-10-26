@@ -16,8 +16,6 @@ class RankingController < ApplicationController
         end
 
         loadOpenRankings
-
-        # render '_ranking_template'
 	end
 
 	def loadGraphic
