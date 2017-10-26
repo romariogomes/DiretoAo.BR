@@ -5,6 +5,8 @@ class PoliticiansController < ApplicationController
   # GET /politicians.json
   def index
     @politicians = Politician.all
+    require 'pry'
+    binding.pry
   end
 
   # GET /politicians/1
@@ -17,17 +19,21 @@ class PoliticiansController < ApplicationController
     @politician = Politician.new
     load_charges
     load_states
+    load_parties
   end
 
   # GET /politicians/1/edit
   def edit
     load_charges
     load_states
+    load_parties
   end
 
   # POST /politicians
   # POST /politicians.json
   def create
+    require 'pry'
+    binding.pry
     @politician = Politician.new(politician_params)
     respond_to do |format|
       if @politician.save
@@ -72,6 +78,6 @@ class PoliticiansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def politician_params
-      params.require(:politician).permit(:name, :birthdate, :party, :photo, :charge_id, :state_id)
+      params.require(:politician).permit(:name, :birthdate, :party_id, :photo, :charge_id, :state_id)
     end
 end

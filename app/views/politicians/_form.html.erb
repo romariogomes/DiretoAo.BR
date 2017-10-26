@@ -33,7 +33,7 @@
     <div class="col-md-2">
       <div class="form-group">
         <%= form.label :party, 'Partido' %>
-        <%= form.text_field :party, id: :politician_party, class: 'form-control' %>
+        <%= collection_select(:politician, :party_id, load_parties, :id, :name, {prompt: "Selecione o partido"}, {class: 'form-control'} )%>
       </div>
     </div>
   </div>

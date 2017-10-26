@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :parties
   get 'sessions/new'
 
   get '/home' => 'home#index'

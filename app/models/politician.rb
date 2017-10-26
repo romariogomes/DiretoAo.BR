@@ -1,6 +1,7 @@
 class Politician < ApplicationRecord
 	belongs_to :state
     belongs_to :charge
+    belongs_to :party
     has_many :experiences
     has_many :notices
     has_many :politician_laws
