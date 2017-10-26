@@ -35,6 +35,7 @@ body {
 
 #chart svg {
   margin: auto;
+  display: block;
 }
 
 #chart path {
@@ -43,8 +44,11 @@ body {
 
 #explanation {
   position: absolute;
-  top: 260px;
-  left: 305px;
+  top: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   width: 140px;
   text-align: center;
   color: #666;

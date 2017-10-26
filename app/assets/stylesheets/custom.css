@@ -2,6 +2,10 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+svg {
+    vertical-align: top;
+}
+
 a:hover, a:visited {
     background-color: transparent !important;
     color: #333333 !important;
