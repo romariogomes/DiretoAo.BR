@@ -165,5 +165,18 @@ var Custom = {
             $('.modal-title').html("Ranking por quantidade de projetos");
             $('.modal-body').html("HUEBR 2");
         });
+
+        
+
+        $('span.expand-law.glyphicon').click(function() { 
+            if ($('#law_project_description').is(":visible")) {
+                $(this).removeClass('glyphicon-chevron-down');
+                $(this).addClass('glyphicon-chevron-right');
+            } else {
+                $(this).removeClass('glyphicon-chevron-right');
+                $(this).addClass('glyphicon-chevron-down');
+            }          
+            
+        });
 	}
 }
