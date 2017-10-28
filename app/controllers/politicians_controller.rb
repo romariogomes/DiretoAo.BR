@@ -5,13 +5,12 @@ class PoliticiansController < ApplicationController
   # GET /politicians.json
   def index
     @politicians = Politician.all
-    require 'pry'
-    binding.pry
   end
 
   # GET /politicians/1
   # GET /politicians/1.json
   def show
+    @listOfPoliticianProjects = @politician.loadProjectsOnPoliticianPage
   end
 
   # GET /politicians/new
@@ -32,8 +31,7 @@ class PoliticiansController < ApplicationController
   # POST /politicians
   # POST /politicians.json
   def create
-    require 'pry'
-    binding.pry
+    
     @politician = Politician.new(politician_params)
     respond_to do |format|
       if @politician.save

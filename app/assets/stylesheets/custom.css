@@ -165,13 +165,13 @@ a.btnSaveComment{
     text-align: center;
 }
 
-#ranking-template {
+#ranking-template, #politician-law-projects {
     width: 90%;
     margin: auto;
     margin-top: 20px;
 }
 
-#ranking-template th, #ranking-template td{
+#ranking-template th, #ranking-template td, #politician-law-projects td, #politician-law-projects th {
     vertical-align: inherit;
     text-align: center;
 } 
@@ -210,6 +210,29 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     cursor: pointer;
 }
 
+.politician-info h4, .politician-info p {
+    display: inline;
+}
+
+#politician-law-projects th.row-number, #politician-law-projects td.row-number{
+    width: 10%;
+}
+
+#politician-law-projects th.row-abstract, #politician-law-projects td.row-abstract{
+    width: 70%;
+}
+
+#politician-law-projects th.row-acceptances, #politician-law-projects td.row-acceptances{
+    width: 20%;
+}
+
+.politician-photo {
+    width: 100px;
+    height: 100px;
+    background: red;
+    margin: auto;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/
@@ -240,5 +263,11 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
 @media screen and (max-width: 990px) {
     .navbar-default .navbar-nav > li > a {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .politician-photo{
+        margin-bottom: 20px;
     }
 }

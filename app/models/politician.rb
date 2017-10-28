@@ -11,4 +11,24 @@ class Politician < ApplicationRecord
     validates :birthdate, presence:true
     validates :party, presence:true
     validates :photo, presence:true
+
+    def age(birthdate)
+      now = Time.now.utc.to_date
+      now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
+    end
+
+    def loadProjectsOnPoliticianPage
+        
+        law_project_ids = []
+        
+        politicianLawXref = PoliticianLaw.where(politician_id: self.id)
+
+        politicianLawXref.each do |lp|
+            law_project_ids.push(lp.law_project_id)    
+        end
+
+        return LawProject.where(id: law_project_ids)
+    end
+
+    
 end
