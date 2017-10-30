@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/like' => 'acceptances#acceptancesInterceptor'
   post '/update-comment' => 'comments#updateComment'
 
+  post '/generate-colors' => 'ranking#generateColorsToSequencesGraph'
+
   root 'home#index'
 
   get    'sign_in'   => 'sessions#new'

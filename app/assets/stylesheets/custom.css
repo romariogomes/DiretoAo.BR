@@ -233,6 +233,10 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     margin: auto;
 }
 
+label#legend-label {
+    font-size: 17px;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/

@@ -24,18 +24,39 @@ var b = {
 };
 
 // Mapping of step names to colors.
-var colors = {
-  "DIREITA": "#5687d1",
-  "ESQUERDA": "#7b615c",
-  "PMDB": "#de783b",
-  "PT": "#6ab975",
-  "PSDB": "#a173d1",
-  "PSOL": "#bbbbbb",
-  "LULA": "#bbbbbb",
-  "EDUARDO_CUNHA": "#bbbbbb",
-  "AECIO_NEVER": "#bbbbbb",
-  "MARCELO_FREIXO": "#bbbbbb"
-};
+
+var colors = function () {
+    
+    var itemsColor = null;
+
+    var d = JSON.stringify({ "teste": "teste" });
+
+    $.ajax({
+      async: false,
+      timeout: 4000,
+      type: 'POST',
+      url: '/generate-colors',
+      data: d,
+      contentType: 'application/json; charset=utf-8',
+      success: function (data) {
+        itemsColor = data;
+      }
+    });
+
+    return itemsColor;
+}();
+// var colors = {
+//   "DIREITA": "#5687d1",
+//   "ESQUERDA": "#7b615c",
+//   "PMDB": "#de783b",
+//   "PT": "#6ab975",
+//   "PSDB": "#a173d1",
+//   "PSOL": "#bbbbbb",
+//   "LULA": "#bbbbbb",
+//   "EDUARDO_CUNHA": "#bbbbbb",
+//   "AECIO_NEVER": "#bbbbbb",
+//   "MARCELO_FREIXO": "#bbbbbb"
+// };
 
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0; 
@@ -59,18 +80,18 @@ var arc = d3.arc()
 // Use d3.text and d3.csvParseRows so that we do not need to have a header
 // row, and can receive the csv as an array of arrays.
 
-// ARQUIVO DEFINITIVO
-// d3.text("../politicianAccepted.csv", function(text) {
-//   var csv = d3.csvParseRows(text);
-//   var json = buildHierarchy(csv);
-//   createVisualization(json);
-// });
-
-d3.text("../diretoaopontobr.csv", function(text) {
+d3.text("../politicianAccepted.csv", function(text) {
   var csv = d3.csvParseRows(text);
   var json = buildHierarchy(csv);
   createVisualization(json);
 });
+
+//ARQUIVO DE TESTES
+// d3.text("../diretoaopontobr.csv", function(text) {
+//   var csv = d3.csvParseRows(text);
+//   var json = buildHierarchy(csv);
+//   createVisualization(json);
+// });
 
 // Main function to draw and set up the visualization, once we have the data.
 function createVisualization(json) {
@@ -242,7 +263,7 @@ function drawLegend() {
 
   // Dimensions of legend item: width, height, spacing, radius of rounded rect.
   var li = {
-    w: 75, h: 30, s: 3, r: 3
+    w: 130, h: 30, s: 3, r: 3
   };
 
   var legend = d3.select("#legend").append("svg:svg")
