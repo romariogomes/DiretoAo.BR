@@ -166,8 +166,6 @@ var Custom = {
             $('.modal-body').html("HUEBR 2");
         });
 
-        
-
         $('span.expand-law.glyphicon').click(function() { 
             if ($('#law_project_description').is(":visible")) {
                 $(this).removeClass('glyphicon-chevron-down');
@@ -175,8 +173,11 @@ var Custom = {
             } else {
                 $(this).removeClass('glyphicon-chevron-right');
                 $(this).addClass('glyphicon-chevron-down');
-            }          
-            
+            }  
+        });
+
+        $("tr.link-to-law-project").click(function() {
+            window.location = $(this).data("href");
         });
 	}
 }

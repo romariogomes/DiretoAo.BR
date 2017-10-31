@@ -233,6 +233,10 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     margin: auto;
 }
 
+tr.link-to-law-project:hover {
+    cursor: pointer;
+}
+
 label#legend-label {
     font-size: 17px;
 }

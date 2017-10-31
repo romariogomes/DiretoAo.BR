@@ -52,14 +52,16 @@
 			 
 			    <tbody>
 			    	<% @listOfPoliticianProjects.each do |lp| %>
-						<tr>
-							<td><%= lp.law_number %></td>
-							<td><%= lp.abstract %></td>
-							<td>
-								<%= lp.countAcceptances[lp.id][:acceptances][:like] %> <span class="like-icon liked" aria-hidden="true"></span> &nbsp;&nbsp;&nbsp;&nbsp;
-								<%= lp.countAcceptances[lp.id][:acceptances][:dislike] %> <span class="dislike-icon disliked" aria-hidden="true"></span>
-							</td>
-						</tr>
+			    		
+							<tr class="link-to-law-project" data-href="/law_projects/<%=lp.id%>">
+								<td><%= lp.law_number %></td>
+								<td><%= lp.abstract %></td>
+								<td>
+									<%= lp.countAcceptances[lp.id][:acceptances][:like] %> <span class="like-icon liked" aria-hidden="true"></span> &nbsp;&nbsp;&nbsp;&nbsp;
+									<%= lp.countAcceptances[lp.id][:acceptances][:dislike] %> <span class="dislike-icon disliked" aria-hidden="true"></span>
+								</td>
+							</tr>
+						
 					<%end%>
 			    </tbody>
 
