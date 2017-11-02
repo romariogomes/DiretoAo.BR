@@ -72,7 +72,8 @@ span.expand-law.glyphicon:hover {
 span.expand-law.glyphicon {
     display: inline-block;
     position: absolute;
-    margin-left: 20%;
+    margin-left: 130px;
+    margin-top: 0px;
 }   
 
 .like-icon {
@@ -241,6 +242,14 @@ label#legend-label {
     font-size: 17px;
 }
 
+.acceptances-counter {
+    margin-bottom: 10px;
+}
+
+.acceptances-counter span.badge.badge-dislike, .acceptances-counter span.badge.badge-like {
+    margin-left: 0px;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/
@@ -268,7 +277,13 @@ label#legend-label {
     }
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (min-width: 992px) {
+    span.expand-law.glyphicon {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 991px) {
     .navbar-default .navbar-nav > li > a {
         font-size: 12px;
     }
