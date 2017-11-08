@@ -59,6 +59,8 @@ $(document).ready(function(){
         .attr("class", "y axis")
         .attr("transform", "translate(" + x.range()[1] / 2 + ", 0)")
         .call(d3.axisLeft(y).ticks(5));
+
+    $("g.tick").remove();
   });
     
   function padExtent(e, p) {
