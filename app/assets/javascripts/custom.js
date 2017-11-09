@@ -9,12 +9,14 @@ var Custom = {
     },
 
     autosizeInput : function() {
-    	// $('#comment-box').autosize();
-    	// $('#law_project_description').autosize();
+        // $('#comment-box').autosize();
+        // $('#law_project_description').autosize();
         $.each($('textarea'), function( index, value ) {
             $(this).autosize();
         });
-	},
+
+        $(':file').filestyle({buttonText: "Escolha o arquivo", buttonBefore: true, placeholder: "Nenhum arquivo selecionado"});
+    },
 
 	bindEvents : function() {
 

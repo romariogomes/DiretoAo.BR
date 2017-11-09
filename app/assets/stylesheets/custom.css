@@ -228,10 +228,19 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
 }
 
 .politician-photo {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     background: red;
     margin: auto;
+}
+
+.politician-photo img, .thumbnail img.politicians-list-photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
 }
 
 tr.link-to-law-project:hover {

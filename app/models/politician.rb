@@ -6,11 +6,13 @@ class Politician < ApplicationRecord
     has_many :notices
     has_many :politician_laws
     has_many :law_projects, through: :politician_laws
+
+    mount_uploader :photo, AttachmentUploader
     
     validates :name, presence:true
     validates :birthdate, presence:true
     validates :party, presence:true
-    validates :photo, presence:true
+    # validates :photo, presence:true
 
     def age(birthdate)
       now = Time.now.utc.to_date
@@ -29,6 +31,5 @@ class Politician < ApplicationRecord
 
         return LawProject.where(id: law_project_ids)
     end
-
     
 end

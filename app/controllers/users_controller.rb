@@ -72,7 +72,6 @@ class UsersController < ApplicationController
   end
 
   def politicSpectre
-    # binding.pry
 
     if (!current_user.nil?)
 
