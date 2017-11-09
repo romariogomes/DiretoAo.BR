@@ -65,6 +65,7 @@ class LawProjectsController < ApplicationController
   # DELETE /law_projects/1
   # DELETE /law_projects/1.json
   def destroy
+    @law_project.interactions.destroy_all
     @law_project.destroy
     respond_to do |format|
       format.html { redirect_to law_projects_url, notice: 'Law project was successfully destroyed.' }

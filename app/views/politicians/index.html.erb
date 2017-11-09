@@ -19,7 +19,19 @@
             <h5><%= p.charge.charge_name.split.map(&:capitalize).join(' ') + ' - ' + p.party.name + '/' + p.state.state_name %></h5>
             <h5>Projetos de lei elaborados: <%= p.law_projects.size %></h5><br />
             
-            <p><a href="/politicians/<%=p.id%>" class="btn btn-default" role="button">Saiba mais</a></p>
+            <p>
+            
+              <a href="/politicians/<%=p.id%>" class="btn btn-default" role="button">Saiba mais</a>
+              
+              <%if !current_user.nil? && isAdmin?%>
+                <a href="<%=edit_politician_path(p)%>" class="btn btn-default" role="button">Editar</a>
+                <a href="/politicians/<%=p.id%>" class="btn btn-default" role="button" data-method="delete" data-confirm="Tem certeza que deseja remover?" style="float: right;">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </a>
+              <%end%>
+
+            </p>
+            
           </div>
 
         </div>

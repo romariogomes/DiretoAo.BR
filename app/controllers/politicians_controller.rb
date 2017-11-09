@@ -61,6 +61,7 @@ class PoliticiansController < ApplicationController
   # DELETE /politicians/1
   # DELETE /politicians/1.json
   def destroy
+    @politician.law_projects.destroy_all if !@politician.law_projects.empty?
     @politician.destroy
     respond_to do |format|
       format.html { redirect_to politicians_url, notice: 'Politician was successfully destroyed.' }

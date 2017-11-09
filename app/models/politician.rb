@@ -12,7 +12,7 @@ class Politician < ApplicationRecord
     validates :name, presence:true
     validates :birthdate, presence:true
     validates :party, presence:true
-    # validates :photo, presence:true
+    validates :photo, presence:true
 
     def age(birthdate)
       now = Time.now.utc.to_date
