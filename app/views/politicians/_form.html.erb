@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="form-group">
         <%= form.label :name, 'Nome' %>
         <%= form.text_field :name, id: :politician_name, class: 'form-control' %>
@@ -33,7 +33,7 @@
     <div class="col-md-2">
       <div class="form-group">
         <%= form.label :party, 'Partido' %>
-        <%= form.text_field :party, id: :politician_party, class: 'form-control' %>
+        <%= collection_select(:politician, :party_id, load_parties, :id, :name, {prompt: "Selecione o partido"}, {class: 'form-control'} )%>
       </div>
     </div>
   </div>
@@ -56,9 +56,13 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= form.label :photo %>
-    <%= form.text_field :photo, id: :politician_photo %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= form.label :photo, 'Foto' %>
+        <%= form.file_field :photo, id: :politician_photo, class: 'ui pink button' %>
+      </div>
+    </div>
   </div> <br/>
 
   <div class="actions">

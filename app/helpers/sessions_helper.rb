@@ -24,7 +24,7 @@ module SessionsHelper
     end
 
     def isAdmin?
-        if current_user.id == 5
+        if current_user.id == 1
           return true
         else
           return false

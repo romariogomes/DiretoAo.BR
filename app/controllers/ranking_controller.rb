@@ -1,4 +1,5 @@
 class RankingController < ApplicationController
+    skip_before_action :verify_authenticity_token
 
 	def index
 
@@ -19,7 +20,7 @@ class RankingController < ApplicationController
 	end
 
 	def loadGraphic
-		
+
         if !(current_user.nil?)
             
             interactions = Interaction.where(user_id: current_user.id)
@@ -69,7 +70,7 @@ class RankingController < ApplicationController
     	
     	politiciansCount.each {|key, value| 
     		politician = Politician.where(name: key).first
-    		lines.push(politician.party+"-"+politician.name+","+value.to_s) 
+    		lines.push(politician.party.orientation+"-"+politician.party.name+"-"+politician.name+","+value.to_s) 
     	}
 
     	writeFile(lines)
@@ -89,6 +90,38 @@ class RankingController < ApplicationController
 	  		file.close
 	    end
     	
+    end
+
+    def generateColorsToSequencesGraph
+        
+        #method to generate random colors for acceptances chart sectors
+
+        data = Hash.new
+        
+        f = File.open "public/politicianAccepted.csv", "r"
+        
+        while !(f.eof) 
+   
+            f.each_line do |line|
+
+                splitedLine = line.split("-")
+                splitedLine[splitedLine.size-1] = splitedLine[splitedLine.size-1].split(",")[0]
+                
+                splitedLine.each do |s|
+                    if !(data.has_key?(s.to_sym))
+                        color = "%06x" % (rand * 0xffffff)
+                        data.store(s.to_sym, "#"+color)       
+                    end        
+                end
+            end
+        end
+
+        respond_to do |format|
+            format.json { render json: data }
+        end
+
+        return "success"
+
     end
 
     def countAllPoliticianLawsAcceptances

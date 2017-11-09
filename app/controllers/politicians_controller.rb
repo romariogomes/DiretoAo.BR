@@ -10,6 +10,7 @@ class PoliticiansController < ApplicationController
   # GET /politicians/1
   # GET /politicians/1.json
   def show
+    @listOfPoliticianProjects = @politician.loadProjectsOnPoliticianPage
   end
 
   # GET /politicians/new
@@ -17,17 +18,20 @@ class PoliticiansController < ApplicationController
     @politician = Politician.new
     load_charges
     load_states
+    load_parties
   end
 
   # GET /politicians/1/edit
   def edit
     load_charges
     load_states
+    load_parties
   end
 
   # POST /politicians
   # POST /politicians.json
   def create
+    
     @politician = Politician.new(politician_params)
     respond_to do |format|
       if @politician.save
@@ -57,6 +61,7 @@ class PoliticiansController < ApplicationController
   # DELETE /politicians/1
   # DELETE /politicians/1.json
   def destroy
+    @politician.law_projects.destroy_all if !@politician.law_projects.empty?
     @politician.destroy
     respond_to do |format|
       format.html { redirect_to politicians_url, notice: 'Politician was successfully destroyed.' }
@@ -72,6 +77,6 @@ class PoliticiansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def politician_params
-      params.require(:politician).permit(:name, :birthdate, :party, :photo, :charge_id, :state_id)
+      params.require(:politician).permit(:name, :birthdate, :party_id, :photo, :charge_id, :state_id)
     end
 end

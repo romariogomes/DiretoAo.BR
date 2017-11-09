@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610210353) do
+ActiveRecord::Schema.define(version: 20171026215654) do
 
   create_table "acceptances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.boolean "like"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170610210353) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "abstract"
   end
 
   create_table "notices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -70,6 +71,13 @@ ActiveRecord::Schema.define(version: 20170610210353) do
     t.datetime "updated_at", null: false
     t.bigint "politician_id"
     t.index ["politician_id"], name: "index_notices_on_politician_id"
+  end
+
+  create_table "parties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "orientation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "politician_laws", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -84,13 +92,14 @@ ActiveRecord::Schema.define(version: 20170610210353) do
   create_table "politicians", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.date "birthdate"
-    t.string "party"
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "charge_id"
     t.bigint "state_id"
+    t.bigint "party_id"
     t.index ["charge_id"], name: "index_politicians_on_charge_id"
+    t.index ["party_id"], name: "index_politicians_on_party_id"
     t.index ["state_id"], name: "index_politicians_on_state_id"
   end
 
@@ -117,5 +126,6 @@ ActiveRecord::Schema.define(version: 20170610210353) do
   add_foreign_key "politician_laws", "law_projects"
   add_foreign_key "politician_laws", "politicians"
   add_foreign_key "politicians", "charges"
+  add_foreign_key "politicians", "parties"
   add_foreign_key "politicians", "states"
 end

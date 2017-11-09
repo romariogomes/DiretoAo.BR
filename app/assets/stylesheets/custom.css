@@ -65,6 +65,17 @@ nav {
     height: 100px !important;
 }*/
 
+span.expand-law.glyphicon:hover {
+    cursor: pointer;
+}
+
+span.expand-law.glyphicon {
+    display: inline-block;
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 0px;
+}   
+
 .like-icon {
     background: url('like_black.png') no-repeat;
     width: 20px;
@@ -155,13 +166,13 @@ a.btnSaveComment{
     text-align: center;
 }
 
-#ranking-template {
+#ranking-template, #politician-law-projects {
     width: 90%;
     margin: auto;
     margin-top: 20px;
 }
 
-#ranking-template th, #ranking-template td{
+#ranking-template th, #ranking-template td, #politician-law-projects td, #politician-law-projects th {
     vertical-align: inherit;
     text-align: center;
 } 
@@ -200,6 +211,54 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     cursor: pointer;
 }
 
+.politician-info h4, .politician-info p {
+    display: inline;
+}
+
+#politician-law-projects th.row-number, #politician-law-projects td.row-number{
+    width: 10%;
+}
+
+#politician-law-projects th.row-abstract, #politician-law-projects td.row-abstract{
+    width: 70%;
+}
+
+#politician-law-projects th.row-acceptances, #politician-law-projects td.row-acceptances{
+    width: 20%;
+}
+
+.politician-photo {
+    width: 200px;
+    height: 200px;
+    background: red;
+    margin: auto;
+}
+
+.politician-photo img, .thumbnail img.politicians-list-photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+tr.link-to-law-project:hover {
+    cursor: pointer;
+}
+
+label#legend-label {
+    font-size: 17px;
+}
+
+.acceptances-counter {
+    margin-bottom: 10px;
+}
+
+.acceptances-counter span.badge.badge-dislike, .acceptances-counter span.badge.badge-like {
+    margin-left: 0px;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/
@@ -227,8 +286,20 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     }
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (min-width: 992px) {
+    span.expand-law.glyphicon {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 991px) {
     .navbar-default .navbar-nav > li > a {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .politician-photo{
+        margin-bottom: 20px;
     }
 }

@@ -33,8 +33,24 @@
 	  <div class="row">
 	    <div class="col-md-12">
 	      <div class="form-group">
-	        <h4>Descrição do projeto</h4>
-	        <%= form.text_area :description, id: :law_project_description, class: 'form-control', readonly: :true %>
+	        <h4>Resumo do projeto</h4>
+	        <%= form.text_area :abstract, id: :law_project_abstract, class: 'form-control', readonly: :true %>
+	      </div>
+	    </div>
+	  </div>
+
+
+	  <div class="row">
+	    <div class="col-md-12">
+	      <div class="form-group">
+	        <h4 >Texto original</h4> 
+	        <span data-toggle="collapse" data-target="#collapseTextoOriginal" class="glyphicon glyphicon-chevron-right expand-law"></span>
+	        
+	        <div class="collapse" id="collapseTextoOriginal">
+			  <div class="card card-block">
+			    <%= form.text_area :description, id: :law_project_description, class: 'form-control', readonly: :true %>
+			  </div>
+			</div>
 	      </div>
 	    </div>
 	  </div>

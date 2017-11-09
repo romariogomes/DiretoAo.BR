@@ -2,28 +2,47 @@
 
 <div class="container">
 
-<h2>Projetos de lei</h2><br />
+  <h2>Projetos de lei</h2><br />
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Número</th>
-      <th>Autor</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row">
 
-  <tbody>
-    <% @law_projects.each do |law_project| %>
-      <tr>
-        <td><%= law_project.law_number %></td>
-        <td><%= law_project.politicians.first.name %></td>
-        <td><%= law_project.date %></td>
-        <td><%= link_to 'Visualizar projeto', law_project %></td>
-      </tr>
+    <% @law_projects.each do |lp| %>
+
+      <div class="col-sm-6 col-md-4">
+
+        <div class="thumbnail">
+
+          <img src="/assets/law-image.jpeg" alt="projeto de lei">
+          
+          <div class="caption">
+            
+            <h3><%= lp.abstract %></h3>
+            <a href="/politicians/<%=lp.politicians.first.id%>"><h5>Autor: <%= lp.politicians.first.name %></h5></a>
+            
+            <div class="acceptances-counter">
+
+              <span class="badge badge-like">
+                <%= lp.countAcceptances[lp.id][:acceptances][:like] %>
+              </span> <span class="like-icon liked" aria-hidden="true"></span> 
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
+              <span class="badge badge-dislike">
+                <%= lp.countAcceptances[lp.id][:acceptances][:dislike] %> 
+              </span> <span class="dislike-icon disliked" aria-hidden="true"></span>
+
+            </div>
+
+            <p><a href="/law_projects/<%=lp.id%>" class="btn btn-default" role="button">Visualizar projeto</a></p>
+
+          </div>
+
+        </div>
+
+      </div>
+
     <% end %>
-  </tbody>
-</table>
+
+  </div>
 
 </div>

@@ -2,40 +2,47 @@
 
 <div class="container">
 
-<h2>Politicians</h2>
+  <h2>Parlamentares</h2><br />
 
+  <div class="row">
+    <% @politicians.sort_by{|obj| obj.name}.each do |p| %>
+      
+      <div class="col-sm-6 col-md-4">
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Cargo</th>
-      <th>Partido</th>
-      <th>Estado</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <div class="thumbnail">
 
-  <tbody>
-    <% @politicians.each do |politician| %>
-      <tr>
-        <td><%= politician.name %></td>
-        <td><%= politician.charge.charge_name %></td>
-        <td><%= politician.party %></td>
-        <td><%= politician.state.state_name %></td>
-        <td><%= link_to 'Show', politician %></td>
-        <td><%= link_to 'Edit', edit_politician_path(politician) %></td>
-        <td>
-            <%= button_to politician, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }  do %>
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            <%end%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <%= image_tag p.photo_url, class: 'politicians-list-photo'%> 
+          
+          <div class="caption">
+            
+            <a href="/politicians/<%=p.id%>"><h3><%= p.name %></h3></a>
+            <h5><%= p.charge.charge_name.split.map(&:capitalize).join(' ') + ' - ' + p.party.name + '/' + p.state.state_name %></h5>
+            <h5>Projetos de lei elaborados: <%= p.law_projects.size %></h5><br />
+            
+            <p>
+            
+              <a href="/politicians/<%=p.id%>" class="btn btn-default" role="button">Saiba mais</a>
+              
+              <%if !current_user.nil? && isAdmin?%>
+                <a href="<%=edit_politician_path(p)%>" class="btn btn-default" role="button">Editar</a>
+                <a href="/politicians/<%=p.id%>" class="btn btn-default" role="button" data-method="delete" data-confirm="Tem certeza que deseja remover?" style="float: right;">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </a>
+              <%end%>
 
-<br>
+            </p>
+            
+          </div>
 
-<%= button_to '+ Novo político', new_politician_path, class: 'btn btn-primary', method: :get %>
+        </div>
+
+      </div>
+    <%end%>
+  </div>
+
+  <%= button_to '+ Novo político', new_politician_path, class: 'btn btn-primary', method: :get if !current_user.nil? && isAdmin?%>
+  
 </div>
+
+ 
+

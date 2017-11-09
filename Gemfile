@@ -37,6 +37,9 @@ gem 'autosize'
 gem 'table_print'
 gem "d3-rails"
 
+#upload files
+gem 'carrierwave'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

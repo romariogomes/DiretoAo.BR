@@ -1,16 +1,19 @@
 Rails.application.routes.draw do
   
+  resources :parties
   get 'sessions/new'
 
   get '/home' => 'home#index'
   
   get '/ranking' => 'ranking#index'
-  get '/acceptancesChart' => 'ranking#loadGraphic'
-  get 'politicSpectre' => 'users#politicSpectre'
+  get '/curtidas' => 'ranking#loadGraphic'
+  get '/espectro' => 'users#politicSpectre'
   get 'ranking/data', :defaults => { :format => 'json' }
 
   post '/like' => 'acceptances#acceptancesInterceptor'
   post '/update-comment' => 'comments#updateComment'
+
+  post '/generate-colors' => 'ranking#generateColorsToSequencesGraph'
 
   root 'home#index'
 

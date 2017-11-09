@@ -72,7 +72,147 @@ class UsersController < ApplicationController
   end
 
   def politicSpectre
+
+    if (!current_user.nil?)
+
+      coordinates = Array.new
+
+      rankingController = RankingController.new
+      rankingController.request = request
+      rankingController.response = response
+      
+      userAcceptances = rankingController.load_all_user_acceptances
+
+      userAcceptances.each do |ua|
+
+        partyOrientation = ua.interaction.law_project.politicians.first.party.orientation
+        like = ua.like
+
+        if like
+          coordinates = calculateCoordinatesForLike(partyOrientation, like)
+        else
+          coordinates = calculateCoordinatesForDislike(partyOrientation, like)
+        end
+      end
+
+      generateSpectreCoordinates(x, y)
+    end
+  end
+
+  def calculateCoordinatesForLike(orientation, like)
     
+    scores = Array.new
+    economic = orientation.split.first(2)
+    social = orientation.split.last(2)
+
+    if economic.first.eql?("DIREITA")
+      scores.push([1])
+    else
+      scores.push([-1])
+    end
+
+    checkOrientationLevelForLike(economic.second, scores[0])
+
+    if social.first.eql?("LIBERTARIO")
+      scores.push([-1])
+    else
+      scores.push([1])
+    end    
+
+    checkOrientationLevelForLike(social.second, scores[1])
+
+    return scores
+  end
+
+  def checkOrientationLevelForLike(orientation, scores)
+
+    if orientation.eql?("CENTRALIZADA")
+      scores[0] =+0
+    elsif orientation.eql?("MODERADA")
+      scores[0] =+1
+    else
+      scores[0] =+2
+    end
+    
+  end
+
+  def calculateCoordinatesForDislike(orientation, like)
+    
+    scores = Array.new
+    economic = orientation.split.first(2)
+    social = orientation.split.last(2)
+
+    if economic.first.eql?("DIREITA")
+      scores.push([-1])
+    else
+      scores.push([1])
+    end
+
+    checkOrientationLevelForDislike(economic.second, scores[0])
+
+    if social.first.eql?("LIBERTARIO")
+      scores.push([1])
+    else
+      scores.push([-1])
+    end    
+
+    checkOrientationLevelForDislike(social.second, scores[1])
+    
+    return scores
+  end
+
+  def checkOrientationLevelForDislike(orientation, scores)
+
+    if orientation.eql?("CENTRALIZADA")
+      scores[0] =+0
+    elsif orientation.eql?("MODERADA")
+      scores[0] =-1
+    else
+      scores[0] =-2
+    end
+    
+  end
+
+  def coordinatesAverage(coordinates)
+    economicLine = 0
+    socialLine = 0
+
+    coordinates.each do |c|
+      economicLine += c[0]
+      socialLine += c[1]
+    end
+
+    generateSpectreCoordinates(economicLine.to_f/coordinates.size, socialLine.to_f/coordinates.size)
+    
+  end
+
+  def generateSpectreCoordinates(x, y)
+    
+    startHash = {
+      "question": "Ideologia política",
+      "answer": "Some answer",
+      "value": x,
+      "consequence": y
+    }
+    
+    coordinates = Array.new
+    coordinates.push(startHash)
+
+    mountSpectreFile(coordinates)
+  end
+
+  def mountSpectreFile(array)
+
+    file = File.new "public/spectreData.json", "w"
+
+    if ( !(lines.empty?) &&  !(lines.nil?) )
+      
+      lines.each do |a|         
+        file.puts a
+      end
+
+      file.close
+    end
   end
 
   private
@@ -85,4 +225,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+  
 end
