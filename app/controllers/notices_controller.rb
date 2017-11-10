@@ -1,4 +1,5 @@
 class NoticesController < ApplicationController
+  before_action :filterAccess
   before_action :set_notice, only: [:show, :edit, :update, :destroy]
 
   # GET /notices
@@ -59,6 +60,10 @@ class NoticesController < ApplicationController
       format.html { redirect_to notices_url, notice: 'Notice was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def filterAccess
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   private

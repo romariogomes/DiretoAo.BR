@@ -1,4 +1,5 @@
 class ExperiencesController < ApplicationController
+  before_action :filterAccess
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
 
   # GET /experiences
@@ -59,6 +60,10 @@ class ExperiencesController < ApplicationController
       format.html { redirect_to experiences_url, notice: 'Experience was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def filterAccess
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   private

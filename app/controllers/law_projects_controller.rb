@@ -1,4 +1,5 @@
 class LawProjectsController < ApplicationController
+  before_action :filterAccess, except: [:index, :show]
   before_action :set_law_project, only: [:show, :edit, :update, :destroy]
 
   # GET /law_projects
@@ -71,6 +72,10 @@ class LawProjectsController < ApplicationController
       format.html { redirect_to law_projects_url, notice: 'Law project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def filterAccess
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   private
