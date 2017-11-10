@@ -1,4 +1,5 @@
 class ChargesController < ApplicationController
+  before_action :filterAccess
   before_action :set_charge, only: [:show, :edit, :update, :destroy]
 
   # GET /charges
@@ -59,6 +60,10 @@ class ChargesController < ApplicationController
       format.html { redirect_to charges_url, notice: 'Charge was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def filterAccess
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   private

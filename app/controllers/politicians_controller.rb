@@ -1,4 +1,5 @@
 class PoliticiansController < ApplicationController
+  before_action :filterAccess, except: [:index, :show]
   before_action :set_politician, only: [:show, :edit, :update, :destroy]
 
   # GET /politicians
@@ -67,6 +68,10 @@ class PoliticiansController < ApplicationController
       format.html { redirect_to politicians_url, notice: 'Politician was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def filterAccess!
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   private

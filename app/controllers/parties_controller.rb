@@ -1,4 +1,5 @@
 class PartiesController < ApplicationController
+  before_action :filterAccess, except: [:index, :show]
   before_action :set_party, only: [:show, :edit, :update, :destroy]
 
   # GET /parties
@@ -59,6 +60,10 @@ class PartiesController < ApplicationController
       format.html { redirect_to parties_url, notice: 'Party was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def filterAccess
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   private
