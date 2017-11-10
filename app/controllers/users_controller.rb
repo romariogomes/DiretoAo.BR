@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :check_privileges!, only: [:index]
+  before_action :filterAccess, only: [:show, :edit]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -215,6 +217,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def check_privileges!
+    redirect_to "/" unless isAdmin?
+  end
+
+  def filterAccess
+    if !current_user.nil?
+      if !isAdmin?
+        if params[:id] != current_user.id.to_s
+          redirect_to "/users/"+current_user.id.to_s  
+        end  
+      end
+    else
+      redirect_to "/"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -223,7 +241,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest)
     end
   
 end

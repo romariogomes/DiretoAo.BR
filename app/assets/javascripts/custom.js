@@ -181,5 +181,47 @@ var Custom = {
         $("tr.link-to-law-project").click(function() {
             window.location = $(this).data("href");
         });
+
+        $("#login-btn").click(function(e) {
+
+            var login = $('#login-username');
+            var password = $('#login-password');
+
+            var errorIcon = '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
+
+            if ((login.val() == '') || (password.val() == '')) {
+                $('#login-error').show();
+                $('#login-error').html(errorIcon + ' Preencha os campos corretamente');
+                e.preventDefault();
+            } else {
+
+                var user_authenticated = null;
+                var idata = JSON.stringify({ email: login.val(), password: password.val() });
+
+                $.ajax({
+                    async: false,
+                    timeout: 4000,
+                    type: 'POST',
+                    url: 'sign_in',
+                    data: idata,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        user_authenticated = data;
+                    }
+                });
+
+                if (!user_authenticated){
+                    $('#login-error').show();
+                    $('#login-error').html(errorIcon + ' Login ou senha inválidos');
+
+                    e.preventDefault();
+                } else {
+                    $('#login-error').hide();
+                    window.location.href = '/home';
+                }
+                
+            }
+
+        });
 	}
 }
