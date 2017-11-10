@@ -182,6 +182,14 @@ var Custom = {
             window.location = $(this).data("href");
         });
 
+        $("#login-username").click(function() {
+            $('#login-error').hide();
+        });
+
+        $("#login-password").click(function() {
+            $('#login-error').hide();
+        });
+
         $("#login-btn").click(function(e) {
 
             var login = $('#login-username');

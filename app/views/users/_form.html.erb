@@ -49,11 +49,11 @@
 
   <div class="actions">
     <%= f.submit "Salvar", class: 'btn btn-primary'%>
-    <%if isAdmin?%>
+    <%if !current_user.nil? && isAdmin?%>
       <%= button_to 'Visualizar', @user, class: 'btn btn-default btn-sm', method: :get%> |
       <%= button_to 'Voltar', users_path, class: 'btn btn-default btn-sm', method: :get%> 
     <%else%>
-      <%= button_to 'Voltar shadh', home_path, class: 'btn btn-default btn-sm', method: :get%>
+      <%= button_to 'Voltar', home_path, class: 'btn btn-default btn-sm', method: :get%>
     <%end%>
 
   </div>
