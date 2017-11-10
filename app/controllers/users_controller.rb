@@ -218,7 +218,7 @@ class UsersController < ApplicationController
   end
 
   def check_privileges!
-    redirect_to "/" unless isAdmin?
+    redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
   def filterAccess
