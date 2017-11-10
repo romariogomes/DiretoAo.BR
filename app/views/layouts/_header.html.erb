@@ -40,20 +40,25 @@
                 
                 <ul class="dropdown-menu" id="popin-login">
                     
-                  <%= form_for(:session, :html => {class: 'form-horizontal', id: 'login-form'}, url: sign_in_path) do |f| %>
-                    
+                  <form class="form-horizontal" id="login-form" data-toggle="validator" novalidate>
                     <div style="margin-bottom: 25px; margin-top: 15px;" class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <%= f.email_field :email, autofocus: true, id: 'login-username', class: 'form-control' %>
+                      <input type="email" class="form-control" id="login-username" required="true">
                     </div>
                    
                     <div style="margin-bottom: 25px" class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                      <%= f.password_field :password, autocomplete: "off", id: 'login-username', class: 'form-control' %>
+                      <input type="password" id="login-password" class="form-control">
                     </div>
 
                     <div class="actions">
-                      <%= f.submit "Login", class: 'btn btn-primary' %>
+                      <input type="submit" class="btn btn-primary" id="login-btn" value="Login">
+                    </div>
+
+                    <div class="alert alert-danger" id="login-error" role="alert" style="display: none;">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Error:</span>
+                      Login ou senha inválido
                     </div>
 
                     <div class="form-group">
@@ -63,8 +68,7 @@
                         </div>
                       </div>
                     </div> 
-
-                  <% end %>
+                  </form>
 
                 </ul>
   

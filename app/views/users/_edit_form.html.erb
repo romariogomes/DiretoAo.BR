@@ -27,25 +27,9 @@
         <%= f.email_field :email, class: 'form-control' %>
       </div>
     </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-2">
-      <div class="field">
-        <%= f.label :password, 'Senha' %>
-        <%= f.password_field :password, class: 'form-control' %>
-      </div>
-    </div>
   </div> <br />
 
-  <div class="row">
-    <div class="col-md-2">
-      <div class="field">
-        <%= f.label :password_confirmation, 'Confirme sua senha' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-    </div>
-  </div> <br />
+  <%= f.hidden_field :password, class: 'form-control', value: @user.password_digest %>
 
   <div class="actions">
     <%= f.submit "Salvar", class: 'btn btn-primary'%>
@@ -53,7 +37,7 @@
       <%= button_to 'Visualizar', @user, class: 'btn btn-default btn-sm', method: :get%> |
       <%= button_to 'Voltar', users_path, class: 'btn btn-default btn-sm', method: :get%> 
     <%else%>
-      <%= button_to 'Voltar shadh', home_path, class: 'btn btn-default btn-sm', method: :get%>
+      <%= link_to 'Voltar', home_path, class: 'btn btn-default btn-sm', method: :get%>
     <%end%>
 
   </div>
