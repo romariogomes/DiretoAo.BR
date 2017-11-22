@@ -264,6 +264,22 @@ label#legend-label {
     margin-left: 0px;
 }
 
+p.static-text, p.font-text{
+    font-family: inherit;
+    font-size: 14px;
+    text-align: justify;
+}
+
+p.font-text {
+    font-size: 12px;
+    float: right;
+}
+
+div.text-content{
+    margin-top: 20px;
+    padding: 10px;
+}
+
 /*textarea.form-control {
     height: 250px;
 }*/
