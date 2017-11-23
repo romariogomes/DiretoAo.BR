@@ -1,5 +1,6 @@
 class PartiesController < ApplicationController
   before_action :filterAccess, except: [:index, :show]
+  before_action :load_ideologies, only: [:new, :edit]
   before_action :set_party, only: [:show, :edit, :update, :destroy]
 
   # GET /parties
@@ -25,7 +26,10 @@ class PartiesController < ApplicationController
   # POST /parties
   # POST /parties.json
   def create
-    @party = Party.new(party_params)
+    
+    @party = Party.new
+    @party.name = party_params[:name]
+    @party.orientation = party_params[:economic_orientation] + ' ' + party_params[:social_orientation]
 
     respond_to do |format|
       if @party.save
@@ -66,6 +70,11 @@ class PartiesController < ApplicationController
     redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
+  def load_ideologies
+    @economicIdeologies = ['DIREITA CENTRALIZADA', 'DIREITA MODERADA', 'DIREITA EXTREMA', 'ESQUERDA CENTRALIZADA', 'ESQUERDA MODERADA', 'ESQUERDA EXTREMA' ]
+    @socialIdeologies = ['AUTORITARIO CENTRALIZADA', 'AUTORITARIO MODERADA', 'AUTORITARIO EXTREMA', 'LIBERTARIO CENTRALIZADA', 'LIBERTARIO MODERADA', 'LIBERTARIO EXTREMA' ]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_party
@@ -74,6 +83,6 @@ class PartiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def party_params
-      params.require(:party).permit(:name, :orientation)
+      params.require(:party).permit(:name, :orientation, :social_orientation, :economic_orientation)
     end
 end

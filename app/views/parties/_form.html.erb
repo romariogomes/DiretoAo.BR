@@ -1,27 +1,46 @@
-<%= form_with(model: party, local: true) do |form| %>
-  <% if party.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(party.errors.count, "error") %> prohibited this party from being saved:</h2>
+<div class="container">
+  <%= form_with(model: party, local: true) do |form| %>
+    <% if party.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(party.errors.count, "error") %> prohibited this party from being saved:</h2>
 
-      <ul>
-      <% party.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% party.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :name, 'Nome' %>
+          <%= form.text_field :name, id: :party_name, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= label :economic_orientation, 'Influência do Estado na economia' %>
+          <%= select(:party, :economic_orientation, @economicIdeologies, {prompt: 'Selecione a orientação'}, {class: 'form-control'} ) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= form.label :social_orientation, 'Influência do Estado no social' %>
+          <%= select(:party, :social_orientation, @socialIdeologies, {prompt: "Influencia do Estado no social"}, {class: 'form-control'} ) %>
+        </div>
+      </div>
+    </div><br />
+
+    <div class="actions">
+      <%= form.submit "Salvar", class: 'btn btn-primary'%>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :party_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :orientation %>
-    <%= form.text_field :orientation, id: :party_orientation %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

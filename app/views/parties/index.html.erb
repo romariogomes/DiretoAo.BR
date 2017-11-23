@@ -1,29 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Parties</h1>
+  <h1>Partidos</h1><br />
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Orientation</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @parties.each do |party| %>
+  <table id="parties-table" class="table table-hover table-responsible">
+    <thead>
       <tr>
-        <td><%= party.name %></td>
-        <td><%= party.orientation %></td>
-        <td><%= link_to 'Show', party %></td>
-        <td><%= link_to 'Edit', edit_party_path(party) %></td>
-        <td><%= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Nome</th>
+        <th>Ideologia política</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @parties.each do |party| %>
+        <tr>
+          <td><%= party.name %></td>
+          <td><%= party.orientation %></td>
+          <td><%= link_to 'Visualizar', party %></td>
+          <td><%= link_to 'Editar dados', edit_party_path(party)%></td>
+          <td>
+            <%= button_to party, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }  do %>
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Party', new_party_path %>
+  <br>
+
+  <%= button_to '+ Novo partido', new_party_path, class: 'btn btn-primary', method: :get %>
+</div>
