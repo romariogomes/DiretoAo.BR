@@ -177,7 +177,7 @@ a.btnSaveComment{
     margin-top: 20px;
 }
 
-#ranking-template th, #ranking-template td, #politician-law-projects td, #politician-law-projects th {
+#ranking-template th, #ranking-template td, #politician-law-projects td, #politician-law-projects th, #parties-table th, #parties-table td {
     vertical-align: inherit;
     text-align: center;
 } 

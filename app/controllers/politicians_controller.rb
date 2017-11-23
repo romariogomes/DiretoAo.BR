@@ -70,7 +70,7 @@ class PoliticiansController < ApplicationController
     end
   end
 
-  def filterAccess!
+  def filterAccess
     redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
