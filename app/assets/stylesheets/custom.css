@@ -292,6 +292,15 @@ div.text-content{
     height: 50px !important;
 }*/
 
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    height: 400px !important;
+    width: 100% !important;
+}
+
+.carousel-inner > .item > a > h3 {
+    margin-left: 20px;
+}
+
 @media screen and (min-width: 765px) {
     #popin-login {
         width: 345px;

@@ -21,9 +21,12 @@ Rails.application.routes.draw do
   post   'sign_in'   => 'sessions#create'
   delete 'sign_out'  => 'sessions#destroy'
 
-  get 'projeto' => 'home#o_projeto'
-  get 'projeto/esquerda-direita' => 'home#esquerda_direita'
-  get 'projeto/espectro-politico' => 'home#espectro_politico'
+  get '/projeto' => 'home#o_projeto'
+  get '/projeto/esquerda-direita' => 'home#esquerda_direita'
+  get '/projeto/espectro-politico' => 'home#espectro_politico'
+
+  get '/projetos-de-lei' => 'law_projects#index'
+  get '/deputados' => 'politicians#index'
 
   resources :comments
   resources :acceptances
