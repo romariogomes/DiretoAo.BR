@@ -129,11 +129,11 @@ class UsersController < ApplicationController
   def checkOrientationLevelForLike(orientation, scores)
 
     if orientation.eql?("CENTRALIZADA")
-      scores[0] =+0
-    elsif orientation.eql?("MODERADA")
       scores[0] =+1
+    elsif orientation.eql?("MODERADA")
+      scores[0] =+3
     else
-      scores[0] =+2
+      scores[0] =+5
     end
     
   end
@@ -166,11 +166,11 @@ class UsersController < ApplicationController
   def checkOrientationLevelForDislike(orientation, scores)
 
     if orientation.eql?("CENTRALIZADA")
-      scores[0] =+0
+      scores[0] =+1
     elsif orientation.eql?("MODERADA")
-      scores[0] =-1
+      scores[0] =-3
     else
-      scores[0] =-2
+      scores[0] =-5
     end
     
   end
