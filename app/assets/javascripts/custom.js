@@ -190,6 +190,31 @@ var Custom = {
             $('#login-error').hide();
         });
 
+        $("#change-pwd-btn").click(function() {
+            var password = $('#pwd').val();
+            var password_confirmation = $('#pwd-confirmation').val();
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            if (password != password_confirmation) {
+                $('#change-password-error').show();
+            } else {
+                
+                $('#change-password-error').hide();
+
+                var data = JSON.stringify({ password: password });
+
+                $.ajax({
+                    async: false,
+                    timeout: 4000,
+                    type: 'POST',
+                    url: '/change-password',
+                    headers: { 'X-CSRF-Token': token },
+                    data: data,
+                    contentType: 'application/json; charset=utf-8'
+                });
+            }
+        });
+
         $("#login-btn").click(function(e) {
 
             var login = $('#login-username');

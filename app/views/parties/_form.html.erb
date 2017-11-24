@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <%= label :economic_orientation, 'Influência do Estado na economia' %>
+          <%= form.label :economic_orientation, 'Influência do Estado na economia' %>
           <%= select(:party, :economic_orientation, @economicIdeologies, {prompt: 'Selecione a orientação'}, {class: 'form-control'} ) %>
         </div>
       </div>
@@ -34,7 +34,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= form.label :social_orientation, 'Influência do Estado no social' %>
-          <%= select(:party, :social_orientation, @socialIdeologies, {prompt: "Influencia do Estado no social"}, {class: 'form-control'} ) %>
+          <%= select(:party, :social_orientation, @socialIdeologies, {prompt: 'Selecione a orientação'}, {class: 'form-control'} ) %>
         </div>
       </div>
     </div><br />
