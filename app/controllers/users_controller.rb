@@ -221,6 +221,17 @@ class UsersController < ApplicationController
     redirect_to "/" unless (!current_user.nil? && isAdmin?)
   end
 
+  def show_change_password
+    redirect_to "/" if current_user.nil?
+  end
+
+  def change_password
+    user = current_user
+    user.password = params[:password]
+
+    redirect_to home_path if user.save
+  end
+
   def filterAccess
     if !current_user.nil?
       if !isAdmin?

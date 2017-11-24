@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   get '/projetos-de-lei' => 'law_projects#index'
   get '/deputados' => 'politicians#index'
 
+  get '/alterar-senha' => 'users#show_change_password'
+  post '/change-password' => 'users#change_password'
+
   resources :comments
   resources :acceptances
   resources :interactions
