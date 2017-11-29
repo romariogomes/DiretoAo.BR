@@ -52,13 +52,16 @@ class RankingController < ApplicationController
     def countPolitician(acceptancesList)
     	
     	politiciansCount = Hash.new
-
+            
     	acceptancesList.each do |a|
-	    	if politiciansCount.has_key?(a.law_project.politicians.first.name)
-	    		politiciansCount[a.law_project.politicians.first.name] = politiciansCount.values_at(a.law_project.politicians.first.name)[0]+1
-	    	else
-	    		politiciansCount.store(a.law_project.politicians.first.name, 1)
-	    	end	
+
+	    	if a.acceptance.like
+                if politiciansCount.has_key?(a.law_project.politicians.first.name)
+                    politiciansCount[a.law_project.politicians.first.name] = politiciansCount.values_at(a.law_project.politicians.first.name)[0]+1
+                else
+                    politiciansCount.store(a.law_project.politicians.first.name, 1)
+                end    
+            end
         end
 
         mountFile(acceptancesList, politiciansCount)
@@ -70,7 +73,7 @@ class RankingController < ApplicationController
     	
     	politiciansCount.each {|key, value| 
     		politician = Politician.where(name: key).first
-    		lines.push(politician.party.orientation+"-"+politician.party.name+"-"+politician.name+","+value.to_s) 
+    		lines.push(politician.party.orientation.split[0]+"-"+politician.party.name+"-"+politician.name+","+value.to_s) 
     	}
 
     	writeFile(lines)
@@ -200,9 +203,10 @@ class RankingController < ApplicationController
 
           value.each do |k,v|
             acceptanceAverage = (v[:acceptances][:like].to_f/(v[:acceptances][:like]+v[:acceptances][:dislike]))*100
-            eachProjectAverage.store(value.keys[0], acceptanceAverage)
-          end
+            eachProjectAverage.store(k, acceptanceAverage)
 
+          end
+          
           sumOfAverage = 0
 
           eachProjectAverage.each do |lawProjectId, average|
@@ -214,9 +218,8 @@ class RankingController < ApplicationController
           eachProjectAverage.clear
 
         end
-
+        
         return allProjectsAverage
-
     end
 
     def sortByUserAcceptances
@@ -283,13 +286,12 @@ class RankingController < ApplicationController
     def loadOpenRankings
 
         if @rankingByAcceptanceAverage.nil?
-            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort.reverse
+            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort_by{|key,value| value}.reverse
         end    
 
         if @rankingByProjectsNumber.nil?
             @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
         end
-        
     end
 
     def loadPrivateRankings
