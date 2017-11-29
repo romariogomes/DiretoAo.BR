@@ -70,7 +70,7 @@ class RankingController < ApplicationController
     	
     	politiciansCount.each {|key, value| 
     		politician = Politician.where(name: key).first
-    		lines.push(politician.party.orientation+"-"+politician.party.name+"-"+politician.name+","+value.to_s) 
+    		lines.push(politician.party.orientation.split[0]+"-"+politician.party.name+"-"+politician.name+","+value.to_s) 
     	}
 
     	writeFile(lines)
