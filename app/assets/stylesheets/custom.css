@@ -248,6 +248,11 @@ ul.nav.nav-tabs.nav-justified li a:hover, #modal-trigger:hover{
     height: 200px;
 }
 
+img.politicians-ranking-photo {
+    width: inherit;
+    height: inherit;
+}
+
 tr.link-to-law-project:hover {
     cursor: pointer;
 }
