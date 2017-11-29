@@ -33,8 +33,7 @@ class RankingController < ApplicationController
                     acceptancesList.push(i)
                 end
             end
-            require 'pry'
-            binding.pry
+
             countPolitician(acceptancesList)      
         end
 
@@ -55,7 +54,7 @@ class RankingController < ApplicationController
     	politiciansCount = Hash.new
             
     	acceptancesList.each do |a|
-            
+
 	    	if a.acceptance.like
                 if politiciansCount.has_key?(a.law_project.politicians.first.name)
                     politiciansCount[a.law_project.politicians.first.name] = politiciansCount.values_at(a.law_project.politicians.first.name)[0]+1
@@ -204,9 +203,10 @@ class RankingController < ApplicationController
 
           value.each do |k,v|
             acceptanceAverage = (v[:acceptances][:like].to_f/(v[:acceptances][:like]+v[:acceptances][:dislike]))*100
-            eachProjectAverage.store(value.keys[0], acceptanceAverage)
-          end
+            eachProjectAverage.store(k, acceptanceAverage)
 
+          end
+          
           sumOfAverage = 0
 
           eachProjectAverage.each do |lawProjectId, average|
@@ -218,9 +218,8 @@ class RankingController < ApplicationController
           eachProjectAverage.clear
 
         end
-
+        
         return allProjectsAverage
-
     end
 
     def sortByUserAcceptances
@@ -287,13 +286,12 @@ class RankingController < ApplicationController
     def loadOpenRankings
 
         if @rankingByAcceptanceAverage.nil?
-            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort.reverse
+            @rankingByAcceptanceAverage = sortByAverageOfAcceptances.sort_by{|key,value| value}.reverse
         end    
 
         if @rankingByProjectsNumber.nil?
             @rankingByProjectsNumber = sortByProjectsCreated.sort_by{|key,value| value}.reverse
         end
-        
     end
 
     def loadPrivateRankings
