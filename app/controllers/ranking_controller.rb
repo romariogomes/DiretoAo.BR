@@ -33,7 +33,8 @@ class RankingController < ApplicationController
                     acceptancesList.push(i)
                 end
             end
-
+            require 'pry'
+            binding.pry
             countPolitician(acceptancesList)      
         end
 
@@ -52,13 +53,16 @@ class RankingController < ApplicationController
     def countPolitician(acceptancesList)
     	
     	politiciansCount = Hash.new
-
+            
     	acceptancesList.each do |a|
-	    	if politiciansCount.has_key?(a.law_project.politicians.first.name)
-	    		politiciansCount[a.law_project.politicians.first.name] = politiciansCount.values_at(a.law_project.politicians.first.name)[0]+1
-	    	else
-	    		politiciansCount.store(a.law_project.politicians.first.name, 1)
-	    	end	
+            
+	    	if a.acceptance.like
+                if politiciansCount.has_key?(a.law_project.politicians.first.name)
+                    politiciansCount[a.law_project.politicians.first.name] = politiciansCount.values_at(a.law_project.politicians.first.name)[0]+1
+                else
+                    politiciansCount.store(a.law_project.politicians.first.name, 1)
+                end    
+            end
         end
 
         mountFile(acceptancesList, politiciansCount)
