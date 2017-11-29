@@ -21,15 +21,14 @@
         
         <% @rankingByAcceptanceAverage.each_with_index do |key, index| %>
           
-          <%politician = Politician.where(name: key.first.to_s)%>
-
+          <% politician = Politician.where(name: key.first.to_s).first%>
           <tr>
             <td class="row-order-number">
               <h3><%= index+1 %></h3>
             </td>
             <td class="row-politician-photo">
               <span class="photo">
-                <%= image_tag politician.photo_url%>
+                <%= image_tag politician.photo_url %>
               </span>
             </td>
             <td class="row-politician-name"><%= key[0].to_s %></td>
