@@ -74,7 +74,7 @@ class UsersController < ApplicationController
   end
 
   def politicSpectre
-
+    
     if (!current_user.nil?)
 
       coordinates = Array.new
@@ -91,13 +91,14 @@ class UsersController < ApplicationController
         like = ua.like
 
         if like
-          coordinates = calculateCoordinatesForLike(partyOrientation, like)
+          coordinates.push(calculateCoordinatesForLike(partyOrientation, like))
         else
-          coordinates = calculateCoordinatesForDislike(partyOrientation, like)
+          coordinates.push(calculateCoordinatesForDislike(partyOrientation, like))
         end
       end
+      
+      coordinatesAverage(coordinates)
 
-      generateSpectreCoordinates(x, y)
     end
   end
 
@@ -108,34 +109,42 @@ class UsersController < ApplicationController
     social = orientation.split.last(2)
 
     if economic.first.eql?("DIREITA")
-      scores.push([1])
+      scores.push(4)
     else
-      scores.push([-1])
+      scores.push(2)
     end
 
-    checkOrientationLevelForLike(economic.second, scores[0])
-
+    scores = checkOrientationLevel(economic.second, scores, 0)
+    
     if social.first.eql?("LIBERTARIO")
-      scores.push([-1])
+      scores.push(2)
     else
-      scores.push([1])
+      scores.push(4)
     end    
 
-    checkOrientationLevelForLike(social.second, scores[1])
+    scores = checkOrientationLevel(social.second, scores, 1)
 
     return scores
   end
 
-  def checkOrientationLevelForLike(orientation, scores)
+  def checkOrientationLevel(orientation, scores, index)
+    # if orientation.eql?("CENTRALIZADA")
+    #   scores[index]<0 ? scores[index]-=1 : scores[index]+=1
+    # elsif orientation.eql?("MODERADA")
+    #   scores[index]<0 ? scores[index]-=3 : scores[index]+=3
+    # else
+    #   scores[index]<0 ? scores[index]-=5 : scores[index]+=5
+    # end
 
     if orientation.eql?("CENTRALIZADA")
-      scores[0] =+1
+      scores[index]<3 ? scores[index]-=0 : scores[index]+=0
     elsif orientation.eql?("MODERADA")
-      scores[0] =+3
+      scores[index]<3 ? scores[index]-=1 : scores[index]+=1
     else
-      scores[0] =+5
+      scores[index]<3 ? scores[index]-=2 : scores[index]+=2
     end
     
+    return scores
   end
 
   def calculateCoordinatesForDislike(orientation, like)
@@ -145,34 +154,22 @@ class UsersController < ApplicationController
     social = orientation.split.last(2)
 
     if economic.first.eql?("DIREITA")
-      scores.push([-1])
+      scores.push(2)
     else
-      scores.push([1])
+      scores.push(4)
     end
 
-    checkOrientationLevelForDislike(economic.second, scores[0])
+    scores = checkOrientationLevel(economic.second, scores, 0)
 
     if social.first.eql?("LIBERTARIO")
-      scores.push([1])
+      scores.push(4)
     else
-      scores.push([-1])
+      scores.push(2)
     end    
 
-    checkOrientationLevelForDislike(social.second, scores[1])
+    scores = checkOrientationLevel(social.second, scores, 1)
     
     return scores
-  end
-
-  def checkOrientationLevelForDislike(orientation, scores)
-
-    if orientation.eql?("CENTRALIZADA")
-      scores[0] =+1
-    elsif orientation.eql?("MODERADA")
-      scores[0] =-3
-    else
-      scores[0] =-5
-    end
-    
   end
 
   def coordinatesAverage(coordinates)
@@ -190,28 +187,23 @@ class UsersController < ApplicationController
 
   def generateSpectreCoordinates(x, y)
     
-    startHash = {
+    startHash = [{
       "question": "Ideologia política",
       "answer": "Some answer",
-      "value": x,
-      "consequence": y
-    }
-    
-    coordinates = Array.new
-    coordinates.push(startHash)
+      "value": x.round(2),
+      "consequence": y.round(2)
+    }]
 
-    mountSpectreFile(coordinates)
+    mountSpectreFile(startHash.to_json)
   end
 
   def mountSpectreFile(array)
 
     file = File.new "public/spectreData.json", "w"
 
-    if ( !(lines.empty?) &&  !(lines.nil?) )
+    if ( !(array.empty?) &&  !(array.nil?) )
       
-      lines.each do |a|         
-        file.puts a
-      end
+      file.puts array
 
       file.close
     end
