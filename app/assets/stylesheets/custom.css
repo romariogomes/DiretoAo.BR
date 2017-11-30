@@ -306,6 +306,30 @@ div.text-content{
     margin-left: 20px;
 }
 
+div.left-label, div.right-label {
+    margin-top: -215px;
+    position: relative;
+}
+
+div.authority-label, div.liberty-label {
+    display: table;
+    margin: 0 auto;
+}
+
+div.authority-label {
+
+}
+
+div.left-label {
+    float: left;
+    margin-left: 50px;
+}
+
+div.right-label {
+    float: right;
+    margin-right: 50px;
+}
+
 @media screen and (min-width: 765px) {
     #popin-login {
         width: 345px;
